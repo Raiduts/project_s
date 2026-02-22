@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1079279954611",
+    "project_id": "skripsi-aldo",
+    "storage_bucket": "skripsi-aldo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079279954611:android:eb68e3158608f66c799ec6",
+        "android_client_info": {
+          "package_name": "com.raiduts.project_s"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0i6YSPJLQzJAQnvlpWrBal9AyhRTlfDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
