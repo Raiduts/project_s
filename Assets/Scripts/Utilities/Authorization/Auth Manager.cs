@@ -34,23 +34,23 @@ public class AuthManager : MonoBehaviour
     public TextMeshProUGUI usernameText;
     public Image authPanel;
 
-    private void Awake()
-    {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        {
-            dependencyStatus = task.Result;
+    //private void Awake()
+    //{
+    //    FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+    //    {
+    //        dependencyStatus = task.Result;
 
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                InitializeFirebase();
-                print("Bisa");
-            }
-            else
-            {
-                Debug.LogError("Could not resolve :" + dependencyStatus.ToString());
-            }
-        });
-    }
+    //        if (dependencyStatus == DependencyStatus.Available)
+    //        {
+    //            InitializeFirebase();
+    //            print("Bisa");
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Could not resolve :" + dependencyStatus.ToString());
+    //        }
+    //    });
+    //}
 
     public void ChangePage(bool isLogin)
     {

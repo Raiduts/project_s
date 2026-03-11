@@ -3,16 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ArrayListQuestBase : MonoBehaviour
+public abstract class QuestBase : MonoBehaviour
 {
     void Start()
     {
         ArrayListEventListener.AddValue += OnAddValue;
-        ArrayListEventListener.CreateArray += OnCreateArray;
+        ArrayListEventListener.CreateArray += OnCreate;
         ArrayListEventListener.ChangeMode += OnChangeMode;
         ArrayListEventListener.ChangeDimension += OnChangeDimension;
         ArrayListEventListener.AddFirst += OnAddFirst;
         ArrayListEventListener.AddLast += OnAddLast;
+    }
+
+    public virtual void OnStartQuest()
+    {
+
     }
 
     private void OnAddLast(int obj)
@@ -35,14 +40,14 @@ public abstract class ArrayListQuestBase : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    private void OnCreateArray(Vector2Int @int)
+    public virtual void OnCreate(Vector2Int vector)
     {
-        //throw new NotImplementedException();
+        // Created Data Structure
     }
 
-    public virtual void OnAddValue(Vector2Int vector, int arg2)
-    {
-        throw new NotImplementedException();
+    public virtual void OnAddValue(Vector2Int vector, int value) 
+    { 
+        // Added Value to Data Structure
     }
 }
 

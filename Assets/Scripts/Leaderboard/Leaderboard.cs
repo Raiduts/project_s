@@ -49,6 +49,8 @@ public class Leaderboard : MonoBehaviour
 
                     tempUserScore.transform.SetParent(container);
 
+                    tempUserScore.transform.localScale = Vector3.one;
+
                     Debug.Log(rank + ". " + name + " - " + score);
                     rank++;
                 }

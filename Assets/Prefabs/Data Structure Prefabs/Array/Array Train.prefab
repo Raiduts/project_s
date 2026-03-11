@@ -49,9 +49,9 @@ MonoBehaviour:
   x: 4
   y: 0
   gapX: 25
-  gapY: 10
+  gapY: 15
   headPref: {fileID: 5694395022662613359, guid: 0f28a2da9e76b8747a3f07a35a04e24f, type: 3}
-  trolley: {fileID: 1792476956978397722, guid: 7983b069498c46242a47741ea5659e19, type: 3}
+  trolley: {fileID: 1792476956978397722, guid: 3c511e46c9d7b7e418be2ecddd055a59, type: 3}
   containerPref: {fileID: 6519031577566125634, guid: 7983b069498c46242a47741ea5659e19, type: 3}
 --- !u!114 &400003692409816924
 MonoBehaviour:

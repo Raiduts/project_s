@@ -5,5 +5,5 @@ using UnityEngine;
 
 public static class QuestEvent
 {
-    public static Action CompletedQuest;
+    public static Action CompletedQuest, CompletedLevel;
 }

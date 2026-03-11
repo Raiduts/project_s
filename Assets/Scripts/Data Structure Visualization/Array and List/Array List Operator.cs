@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class ArrayListOperator : MonoBehaviour
 {
+    public static ArrayListOperator instance;
+
     private CodePrinter printer;
 
     [Header("Create")]
@@ -37,8 +39,12 @@ public class ArrayListOperator : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
+
         createButton.onClick.AddListener(CreateArray);
         setValueButton.onClick.AddListener(SetValue);
+
+        SetArrayDimension(false);
 
         printer = CodePrinter.Instance;
     }
@@ -63,9 +69,14 @@ public class ArrayListOperator : MonoBehaviour
     {
         Vector2Int xy = new(int.Parse(xIndex.text), int.Parse(yIndex.text));
 
+        if (!is2D)
+        {
+            xy.y = 0;
+        }
+
         int value = int.Parse(valueInput.text);
 
-        printer.AddTextCode($"array[{xIndex.text},{yIndex.text}] = {valueInput.text}");
+        printer.AddTextCode($"array[{xy.x},{xy.y}] = {valueInput.text}");
 
         ArrayListEventListener.AddValue(xy, value);
 
@@ -83,7 +94,7 @@ public class ArrayListOperator : MonoBehaviour
 
         if (isOpen)
         {
-            transform.DOMoveY(-500, 0.5f).SetEase(Ease.InQuad).SetRelative(true).OnComplete(() =>
+            transform.DOMoveY(-350, 0.5f).SetEase(Ease.InQuad).SetRelative(true).OnComplete(() =>
                 {
                     isOnAction = false;
                 }
@@ -91,7 +102,7 @@ public class ArrayListOperator : MonoBehaviour
             isOpen = false;
         } else
         {
-            transform.DOMoveY(500, 0.5f).SetEase(Ease.InQuad).SetRelative(true).OnComplete(() => 
+            transform.DOMoveY(350, 0.5f).SetEase(Ease.InQuad).SetRelative(true).OnComplete(() => 
             {
                 isOnAction = false;
             }

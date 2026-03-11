@@ -44,12 +44,12 @@ public class Locomotive : MonoBehaviour
 
                 Vector3 carriageGap = new(gapX * (i + 1), -gapY * j, 0);
 
-                GameObject trolleyObj = Instantiate(trolley, transform);
-                trolleyObj.transform.localPosition += carriageGap;
+                // GameObject trolleyObj = Instantiate(trolley, transform);
+                // trolleyObj.transform.localPosition += carriageGap;
 
                 //for (int j = 0; j < y; j++)
                 //{
-                Vector3 containerGap = new(gapX * (i + 1) - 0.5f, -gapY * j + 2.25f, 0);
+                Vector3 containerGap = new(gapX * (i + 1) - 0.5f, -gapY * j, 0);
                 CreateContainer(i, j, containerGap);
                 //}
             }

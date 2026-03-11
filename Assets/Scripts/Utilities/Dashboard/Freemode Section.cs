@@ -14,22 +14,18 @@ public class FreemodeSection : MonoBehaviour
     [SerializeField]
     private Transform panelTransform;
 
-    private void Start()
+    public void OpenGameSection()
     {
-        
-    }
-
-    public void OpenFreemodeSection()
-    {
+        print($"Open {gameObject.name}");
         freemodeCanvas.gameObject.SetActive(true);
         backgroundImage.DOFade(0.75f, 0.5f).From(0);
         panelTransform.DOLocalMoveY(0, 0.5f).From(1500).SetEase(Ease.OutBack);
     }
 
-    public void CloseFreemodeSection()
+    public void CloseGameSection()
     {
-        backgroundImage.DOFade(0, 0.5f);
-        panelTransform.DOLocalMoveY(1500, 0.5f).SetEase(Ease.InQuad).OnComplete(() => 
+        backgroundImage.DOFade(0, 0.25f);
+        panelTransform.DOLocalMoveY(1500, 0.25f).SetEase(Ease.InQuad).OnComplete(() => 
         {
             freemodeCanvas.gameObject.SetActive(false);
         });
@@ -37,7 +33,15 @@ public class FreemodeSection : MonoBehaviour
 
     public void EnterFreemode(string sceneName)
     {
-        CloseFreemodeSection();
+        CloseGameSection();
         MySceneManager.instance.ChangeScene(sceneName);
+    }
+
+    public void EnterCampaign(int campaignType)
+    {
+        CloseGameSection();
+
+        PlayerPrefs.SetInt("campaignType", campaignType);
+        MySceneManager.instance.ChangeScene("Campaign");
     }
 }
