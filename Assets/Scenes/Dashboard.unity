@@ -1009,6 +1009,18 @@ PrefabInstance:
       propertyPath: m_Padding.m_Bottom
       value: 240
       objectReference: {fileID: 0}
+    - target: {fileID: 7360389818185027417, guid: 2e609a1a2df2e75439119e75f9829447, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2186.0002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360389818185027417, guid: 2e609a1a2df2e75439119e75f9829447, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080.1915
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360389818185027417, guid: 2e609a1a2df2e75439119e75f9829447, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -531.96
+      objectReference: {fileID: 0}
     - target: {fileID: 8103394444221062947, guid: 2e609a1a2df2e75439119e75f9829447, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
