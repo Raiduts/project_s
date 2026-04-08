@@ -49,6 +49,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2920702665555835474, guid: 031541cdf6edcb74d912ee2dea81a248, type: 3}
+      propertyPath: tips
+      value: 
+      objectReference: {fileID: 889500356610441486, guid: b95cfeb41f345a646a72ac562628afd3, type: 3}
+    - target: {fileID: 2920702665555835474, guid: 031541cdf6edcb74d912ee2dea81a248, type: 3}
       propertyPath: questTitle
       value: Isi Array
       objectReference: {fileID: 0}

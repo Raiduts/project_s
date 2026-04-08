@@ -13,7 +13,7 @@ public class Dudu : MonoBehaviour
     private TextMeshProUGUI duduText, taskTitleText, taskProgressText;
 
     [SerializeField]
-    private Image duduImage, duduTextPanel;
+    private Image duduImage, duduTextPanel, background;
 
     private void Awake()
     {
@@ -25,15 +25,21 @@ public class Dudu : MonoBehaviour
 
     private void Start()
     {
-        if (AuthManager.Instance && AuthManager.Instance.User != null) 
-            ShowDudu($"Hello {AuthManager.Instance.User.DisplayName}!");
+        print("Dudu");
+
+        if (AuthManager.Instance && AuthManager.Instance.User() != null) 
+            ShowDudu($"Hello {AuthManager.Instance.User().DisplayName}!");
         else ShowDudu("Hello user!");
     }
 
     public void ShowDudu(string duduSpeech)
     {
-        duduImage.gameObject.SetActive(true);
+        print("Showing dudu");
 
+        duduImage.gameObject.SetActive(true);
+        background.gameObject.SetActive(true);
+
+        background.DOFade(0.9f, 0.5f);
         duduImage.transform.DOMoveY(-1000, 0.5f).From();
         duduImage.DOFade(1, 0.5f).From(0); 
         duduTextPanel.DOFade(1, 0.5f).From(0).SetDelay(0.5f).OnComplete(() => 
@@ -66,8 +72,11 @@ public class Dudu : MonoBehaviour
     {
         // duduImage.DOFade(0, 0.5f).From(1).SetDelay(0.5f);
         // duduTextPanel.DOFade(0, 0.5f).From(1);
+
         duduImage.transform.DOMoveY(-1000, 0.5f).SetDelay(0.5f).OnComplete(() =>
         {
+            background.DOFade(0, 0.5f);
+            background.gameObject.SetActive(false);
             duduImage.gameObject.SetActive(false);
             duduImage.transform.position = new(duduImage.transform.position.x, 232, 0);
             duduText.text = "";

@@ -53,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8205616351843158840, guid: 56d4f7cee23334e4a886b94ce82b1684, type: 3}
+      propertyPath: tips
+      value: 
+      objectReference: {fileID: 889500356610441486, guid: e2e87670630fd8c4b84aa94f0ca324bc, type: 3}
+    - target: {fileID: 8205616351843158840, guid: 56d4f7cee23334e4a886b94ce82b1684, type: 3}
       propertyPath: questTitle
       value: Bikin Array
       objectReference: {fileID: 0}

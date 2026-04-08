@@ -12,7 +12,7 @@ public class QuestOnAddFirst : QuestBase
 
     public override void OnAddFirst(int obj)
     {
-        if (obj == requiredNumber)
+        if (QuestManager.instance.CheckQuest(this))
         {
             Dudu.Instance.ShowDudu(duduComment);
 

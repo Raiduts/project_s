@@ -32,6 +32,8 @@ public class QueueOperator : MonoBehaviour
 
         queueManager.AddCard(temp);
 
+        EventListener.AddFirst?.Invoke(0);
+
         CodePrinter.Instance.AddTextCode($"queue.Enqueue({temp.GetNumber()})");
     }
 
@@ -40,7 +42,9 @@ public class QueueOperator : MonoBehaviour
         if (isOperating) return;
 
         CardQueue temp = queueManager.TakeCard();
-        
+
+        EventListener.RemoveFirst?.Invoke();
+
         CodePrinter.Instance.AddTextCode($"queue.Dequeue()");
 
         CodePrinter.Instance.AddTextCode($"return : {temp.GetNumber()}");
@@ -62,6 +66,8 @@ public class QueueOperator : MonoBehaviour
         if (isOperating) return;
 
         int size = queueManager.GetQueueSize();
+
+        EventListener.GetSize?.Invoke(size);
 
         CodePrinter.Instance.AddTextCode($"queue.GetSize()");
 

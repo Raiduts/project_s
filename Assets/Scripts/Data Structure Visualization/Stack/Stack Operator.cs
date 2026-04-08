@@ -48,6 +48,8 @@ public class StackOperator : MonoBehaviour
 
         burgerStack.PushBurger(tempPart);
 
+        EventListener.AddFirst?.Invoke(0);
+
         CodePrinter.Instance.AddTextCode($"stack.Push({burgerStack.GetTopPart().GetName()})");
     }
 
@@ -57,6 +59,8 @@ public class StackOperator : MonoBehaviour
 
         BurgerPart temp = burgerStack.PopBurger();
 
+        EventListener.RemoveLast?.Invoke();
+
         CodePrinter.Instance.AddTextCode($"stack.Pop()");
 
         CodePrinter.Instance.AddTextCode($"return : {temp.GetName()}");
@@ -64,6 +68,8 @@ public class StackOperator : MonoBehaviour
 
     public void CheckSize()
     {
+        EventListener.GetSize?.Invoke(burgerStack.GetSize());
+
         CodePrinter.Instance.AddTextCode($"stack.Size()");
 
         CodePrinter.Instance.AddTextCode($"return : {burgerStack.GetSize()}");

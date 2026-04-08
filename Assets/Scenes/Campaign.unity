@@ -2111,15 +2111,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: ArrayQuest.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: QueueQuest.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: StackQuest.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: ArrayQuest.Array.data[1]
@@ -2128,15 +2128,15 @@ PrefabInstance:
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: ArrayQuest.Array.data[2]
       value: 
-      objectReference: {fileID: 587811472628579024, guid: e364658f80fb1164a9381b843719c23b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: ArrayQuest.Array.data[3]
       value: 
-      objectReference: {fileID: 587811472628579024, guid: e364658f80fb1164a9381b843719c23b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: QueueQuest.Array.data[0]
       value: 
-      objectReference: {fileID: 587811472628579024, guid: 027d244fd6c8fa840ba2a84a2dbe223a, type: 3}
+      objectReference: {fileID: 587811472628579024, guid: 5077258b622e4374baf14c77e03449e3, type: 3}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: QueueQuest.Array.data[1]
       value: 
@@ -2152,7 +2152,7 @@ PrefabInstance:
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: StackQuest.Array.data[0]
       value: 
-      objectReference: {fileID: 587811472628579024, guid: 027d244fd6c8fa840ba2a84a2dbe223a, type: 3}
+      objectReference: {fileID: 587811472628579024, guid: 2fda5561dc485d148be1bfa4ed963977, type: 3}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: StackQuest.Array.data[1]
       value: 
@@ -2167,16 +2167,16 @@ PrefabInstance:
       objectReference: {fileID: 587811472628579024, guid: e364658f80fb1164a9381b843719c23b, type: 3}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: LinkedlistQuest.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: LinkedlistQuest.Array.data[0]
       value: 
-      objectReference: {fileID: 587811472628579024, guid: 027d244fd6c8fa840ba2a84a2dbe223a, type: 3}
+      objectReference: {fileID: 587811472628579024, guid: 57238777eef03f64fae176608fbf8b07, type: 3}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: LinkedlistQuest.Array.data[1]
       value: 
-      objectReference: {fileID: 587811472628579024, guid: e364658f80fb1164a9381b843719c23b, type: 3}
+      objectReference: {fileID: 587811472628579024, guid: b5254ffd87a67c6498f0727584b6fb65, type: 3}
     - target: {fileID: 4423809979819224301, guid: 502390327125a194488fe0993691018e, type: 3}
       propertyPath: LinkedlistQuest.Array.data[2]
       value: 

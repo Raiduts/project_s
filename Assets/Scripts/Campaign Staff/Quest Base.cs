@@ -13,6 +13,9 @@ public abstract class QuestBase : MonoBehaviour
     [TextArea]
     public string duduComment;
 
+    [Header("Tips")]
+    [SerializeField] private Tips tips;
+
     void Start()
     {
         EventListener.AddValue += OnAddValue;
@@ -27,24 +30,32 @@ public abstract class QuestBase : MonoBehaviour
         EventListener.IsEmpty += IsEmpty;
     }
 
+    public virtual void TryShowTips()
+    {
+        if (tips != null)
+        {
+            Instantiate(tips).OpenTips();
+        }
+    }
+
     public virtual void IsEmpty()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public virtual void OnGetSize(int obj)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public virtual void OnRemoveLast()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public virtual void OnRemoveFirst()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public virtual void OnStartQuest()
@@ -54,12 +65,12 @@ public abstract class QuestBase : MonoBehaviour
 
     public virtual void OnAddLast(int obj)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public virtual void OnAddFirst(int obj)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public virtual void OnChangeDimension(ArrayDimension dimension)
@@ -69,7 +80,7 @@ public abstract class QuestBase : MonoBehaviour
 
     public virtual void OnChangeMode(OperatorMode mode)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public virtual void OnCreate(Vector2Int vector)

@@ -21,6 +21,8 @@ public class QuestManager : MonoBehaviour
     private QuestBase currentQuest;
     private int currentQuestId;
 
+    private bool isStarting;
+
     private void Awake()
     {
         instance = this;
@@ -51,6 +53,8 @@ public class QuestManager : MonoBehaviour
             quests.Enqueue(tempQuest);
         }
         
+        isStarting = true;
+
         StartNewQuest();
         //currentQuest = quests.Dequeue();
     }
@@ -71,13 +75,15 @@ public class QuestManager : MonoBehaviour
 
     private void EndQuest()
     {
-            QuestEvent.CompletedLevel?.Invoke();
-            print("LEVEL COMPLETED");
+        QuestEvent.CompletedLevel?.Invoke();
+        print("LEVEL COMPLETED");
     }
 
     public void StartNewQuest()
     {
         currentQuest = quests.Dequeue();
+
+        currentQuest.TryShowTips();
 
         questInfo.ShowQuestInfo(currentQuest);
         
@@ -112,6 +118,6 @@ public class QuestManager : MonoBehaviour
 
     public bool CheckQuest(QuestBase quest)
     {
-        return quest == currentQuest;
+        return quest == currentQuest && isStarting;
     }
 }

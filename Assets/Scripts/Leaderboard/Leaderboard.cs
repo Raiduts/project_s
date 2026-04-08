@@ -14,7 +14,8 @@ public class Leaderboard : MonoBehaviour
 
     public void Start()
     {
-        AuthManager.Instance.LoggedIn += GetTop10;
+        //AuthManager.Instance.LoggedIn += GetTop10;
+        GetTop10();
     }
 
     public void AddLeaderboard()
@@ -51,7 +52,7 @@ public class Leaderboard : MonoBehaviour
 
                     tempUserScore.transform.localScale = Vector3.one;
 
-                    Debug.Log(rank + ". " + name + " - " + score);
+                    //Debug.Log(rank + ". " + name + " - " + score);
                     rank++;
                 }
             }
@@ -62,7 +63,7 @@ public class Leaderboard : MonoBehaviour
     {
         string email = $"user{Random.Range(0, 100)}{Random.Range(0, 100)}{Random.Range(0, 100)}@gmail.com";
 
-        string playerName = AuthManager.Instance.User.DisplayName;
+        string playerName = AuthManager.Instance.User().DisplayName;
 
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
