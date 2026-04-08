@@ -13,6 +13,10 @@ public class FreemodeSection : MonoBehaviour
     private Image backgroundImage;
     [SerializeField]
     private Transform panelTransform;
+    [SerializeField]
+    private CreateSessionTeacher createSessionTeacherPref;
+    [SerializeField]
+    private JoinSessionStudent joinSessionStudentPref;
 
     public void OpenGameSection()
     {
@@ -29,6 +33,16 @@ public class FreemodeSection : MonoBehaviour
         {
             freemodeCanvas.gameObject.SetActive(false);
         });
+    }
+
+    public void OpenCreateTab()
+    {
+        Instantiate(createSessionTeacherPref);
+    }
+
+    public void OpenJoinTab()
+    {
+        Instantiate(joinSessionStudentPref);
     }
 
     public void EnterFreemode(string sceneName)

@@ -43,9 +43,9 @@ public class Setting : MonoBehaviour
         });
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Logout()
     {
-        
+        AuthManager.Instance.Logout();
+        CloseSetting();
     }
 }

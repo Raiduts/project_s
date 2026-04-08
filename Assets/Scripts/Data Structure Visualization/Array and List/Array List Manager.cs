@@ -15,7 +15,7 @@ public class ArrayListManager : MonoBehaviour
 
     private void Start()
     {
-        ArrayListEventListener.CreateArray += CreateNewLocomotive;
+        EventListener.CreateArray += CreateNewLocomotive;
     }
 
     public void CreateNewLocomotive(Vector2Int index)
@@ -39,21 +39,30 @@ public class ArrayListManager : MonoBehaviour
         });
     }
 
-    public void EditLocomotive(AddType addType)
+    public void EditLocomotive(EditType addType)
     {
-        if (addType == AddType.AddFirst)
+        switch (addType)
         {
-            currentLocomotive.AddFirst();
-        }
-        else
-        {
-            currentLocomotive.AddLast();
+            case EditType.AddFirst:
+                currentLocomotive.AddFirst();
+                break;
+            case EditType.AddLast:
+                currentLocomotive.AddLast();
+                break;
+            case EditType.RemoveFirst:
+                currentLocomotive.RemoveFirst();
+                break;
+            case EditType.RemoveLast:
+                currentLocomotive.RemoveLast();
+                break;
         }
     }
 }
 
-public enum AddType
+public enum EditType
 {
     AddFirst,
-    AddLast
+    AddLast,
+    RemoveFirst,
+    RemoveLast
 }

@@ -45,4 +45,26 @@ public class QueueOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"return : {temp.GetNumber()}");
     }
+
+    public void IsEmpty()
+    {
+        if (isOperating) return;
+
+        bool isEmpty = queueManager.GetQueueSize() == 0;
+
+        CodePrinter.Instance.AddTextCode($"queue.IsEmpty()");
+
+        CodePrinter.Instance.AddTextCode($"return : {isEmpty}");
+    }
+
+    public void GetSize()
+    {
+        if (isOperating) return;
+
+        int size = queueManager.GetQueueSize();
+
+        CodePrinter.Instance.AddTextCode($"queue.GetSize()");
+
+        CodePrinter.Instance.AddTextCode($"return : {size}");
+    }
 }

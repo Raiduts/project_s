@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -8,6 +10,12 @@ public class QuestManager : MonoBehaviour
 
     [Header("Quests")]
     [SerializeField]
+    private QuestInfo questInfo;
+    private Vector3 questInfoPanelFirstPos;
+    [SerializeField]
+    private TextMeshProUGUI questTitle;
+    [SerializeField]
+    private TextMeshProUGUI questObjective;
     private LevelData questLevel;
     private Queue<QuestBase> quests;
     private QuestBase currentQuest;
@@ -22,7 +30,8 @@ public class QuestManager : MonoBehaviour
     {
         quests = new Queue<QuestBase>();
 
-        CheckForQuest();
+        Invoke(nameof(CheckForQuest), 5f);
+        //CheckForQuest();
 
         QuestEvent.CompletedQuest += OnCompleteQuest;
     }
@@ -42,28 +51,54 @@ public class QuestManager : MonoBehaviour
             quests.Enqueue(tempQuest);
         }
         
-        currentQuest = quests.Dequeue();
+        StartNewQuest();
+        //currentQuest = quests.Dequeue();
     }
 
     public void OnCompleteQuest()
     {
+        questInfo.HideQuestInfo();
+
         if (quests.Count > 0)
         {
             Invoke(nameof(StartNewQuest), 5f);
         }
         else
         {
+            Invoke(nameof(EndQuest), 5f);
+        }
+    }
+
+    private void EndQuest()
+    {
             QuestEvent.CompletedLevel?.Invoke();
             print("LEVEL COMPLETED");
-        }
     }
 
     public void StartNewQuest()
     {
         currentQuest = quests.Dequeue();
+
+        questInfo.ShowQuestInfo(currentQuest);
         
         currentQuest.OnStartQuest();
     }
+
+    //private void ShowQuestInfo()
+    //{
+    //    questInfoPanel.DOLocalMoveX(600, 0.5f).SetRelative(); 
+
+    //    questTitle.text = currentQuest.questTitle;
+    //    questObjective.text = currentQuest.questObjective;
+    //}
+
+    //private void HideQuestInfo()
+    //{
+    //    questInfoPanel.DOLocalMoveX(-600, 0.5f).SetRelative();
+
+    //    questTitle.text = "";
+    //    questObjective.text = "";
+    //}
 
     public int GetQuestId()
     {

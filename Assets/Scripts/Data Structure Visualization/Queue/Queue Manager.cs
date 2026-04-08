@@ -56,4 +56,9 @@ public class QueueManager : MonoBehaviour
 
         isOperating?.Invoke(false);
     }
+
+    public int GetQueueSize()
+    {
+        return cards.Count;
+    }
 }

@@ -11,7 +11,8 @@ public class StackOperator : MonoBehaviour
 
     [SerializeField]
     private List<BurgerPart> partsPref;
-    
+    private BurgerPart selectedPartPref;
+
     private bool isOperating;
 
     private void Awake()
@@ -34,11 +35,16 @@ public class StackOperator : MonoBehaviour
         this.isOperating = isOperating;
     }
 
-    public void PushByType(int partIndex)
+    public void ChoosePart(int partIndex)
     {
-        if (isOperating) return;
+        selectedPartPref = partsPref[partIndex];
+    }
 
-        BurgerPart tempPart = Instantiate(partsPref[partIndex], transform);
+    public void PushByType()
+    {
+        if (isOperating || !selectedPartPref) return;
+
+        BurgerPart tempPart = Instantiate(selectedPartPref, transform);
 
         burgerStack.PushBurger(tempPart);
 

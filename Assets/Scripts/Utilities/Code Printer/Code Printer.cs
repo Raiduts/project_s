@@ -46,7 +46,7 @@ public class CodePrinter : MonoBehaviour
 
     public void Show()
     {
-        codePanel.DOMoveX(startPosition.x - 720, 1);
+        codePanel.DOMoveX(startPosition.x - 480, 1);
     }
 
     public void Hide()

@@ -14,7 +14,7 @@ public class Leaderboard : MonoBehaviour
 
     public void Start()
     {
-        GetTop10();
+        AuthManager.Instance.LoggedIn += GetTop10;
     }
 
     public void AddLeaderboard()
@@ -62,7 +62,7 @@ public class Leaderboard : MonoBehaviour
     {
         string email = $"user{Random.Range(0, 100)}{Random.Range(0, 100)}{Random.Range(0, 100)}@gmail.com";
 
-        string playerName = AuthManager.user.DisplayName;
+        string playerName = AuthManager.Instance.User.DisplayName;
 
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 

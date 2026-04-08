@@ -54,15 +54,23 @@ public class ArrayListOperator : MonoBehaviour
         int x = int.Parse(xLength.text);
         int y = int.Parse(yLength.text);
 
-        x = x == 0 ? 1 : x;
+        //x = x == 0 ? 1 : x;
         y = y == 0 || !is2D ? 1 : y;
 
-        ArrayListEventListener.CreateArray(new(x, y));
+        EventListener.CreateArray(new(x, y));
 
         // ArrayListManager.Instance.CreateNewLocomotive(x, y);
 
         printer.AddTextCode($"array.Clear()");
-        printer.AddTextCode($"array = new[{x},{y}]");
+
+        if (is2D)
+        {
+            printer.AddTextCode($"array = new[{x},{y}]");
+        }
+        else
+        {
+            printer.AddTextCode($"array = new[{x}]");
+        }
     }
 
     public void SetValue()
@@ -76,9 +84,16 @@ public class ArrayListOperator : MonoBehaviour
 
         int value = int.Parse(valueInput.text);
 
-        printer.AddTextCode($"array[{xy.x},{xy.y}] = {valueInput.text}");
+        if (is2D)
+        {
+            printer.AddTextCode($"array[{xy.x},{xy.y}] = {valueInput.text}");
+        }
+        else
+        {
+            printer.AddTextCode($"array[{xy.x}] = {valueInput.text}");
+        }
 
-        ArrayListEventListener.AddValue(xy, value);
+        EventListener.AddValue(xy, value);
 
         // ArrayListManager.Instance.currentLocomotive.SetContainerValue(int.Parse(xIndex.text), int.Parse(yIndex.text), int.Parse(valueInput.text));
     }
@@ -113,20 +128,38 @@ public class ArrayListOperator : MonoBehaviour
 
     public void AddFirst()
     {
-        ArrayListManager.Instance.EditLocomotive(AddType.AddFirst);
+        ArrayListManager.Instance.EditLocomotive(EditType.AddFirst);
 
-        ArrayListEventListener.AddFirst?.Invoke(0);
+        EventListener.AddFirst?.Invoke(0);
 
         printer.AddTextCode("linkedlist.AddFirst()");
     }
 
     public void AddLast()
     {
-        ArrayListManager.Instance.EditLocomotive(AddType.AddLast);
+        ArrayListManager.Instance.EditLocomotive(EditType.AddLast);
 
-        ArrayListEventListener.AddLast?.Invoke(0);
+        EventListener.AddLast?.Invoke(0);
 
         printer.AddTextCode("linkedlist.AddLast()");
+    }
+
+    public void RemoveFirst()
+    {
+        ArrayListManager.Instance.EditLocomotive(EditType.RemoveFirst);
+
+        EventListener.RemoveFirst?.Invoke();
+
+        printer.AddTextCode("linkedlist.RemoveFirst()");
+    }
+
+    public void RemoveLast()
+    {
+        ArrayListManager.Instance.EditLocomotive(EditType.RemoveLast);
+
+        EventListener.RemoveLast?.Invoke();
+
+        printer.AddTextCode("linkedlist.RemoveLast()");
     }
 
     private IEnumerator ChangeModeWhileOpen()
@@ -164,6 +197,9 @@ public class ArrayListOperator : MonoBehaviour
     public void ChangeDimension()
     {
         is2D = !is2D;
+
         SetArrayDimension(is2D);
+
+        EventListener.ChangeDimension?.Invoke(is2D? ArrayDimension.TwoDimension : ArrayDimension.OneDimension);
     }
 }

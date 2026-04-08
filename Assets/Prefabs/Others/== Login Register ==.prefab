@@ -994,6 +994,7 @@ MonoBehaviour:
   newPasswordTextField: {fileID: 5691871653164303724}
   confirmPasswordTextField: {fileID: 6517894427707944514}
   usernameText: {fileID: 4780009124272007462}
+  authPanel: {fileID: 0}
 --- !u!1 &861280439380816509
 GameObject:
   m_ObjectHideFlags: 0

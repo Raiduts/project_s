@@ -18,7 +18,7 @@ public class Locomotive : MonoBehaviour
 
     private void Start()
     {
-        ArrayListEventListener.AddValue += SetContainerValue;
+        EventListener.AddValue += SetContainerValue;
     }
 
     public void SetLength(int x, int y)
@@ -60,7 +60,7 @@ public class Locomotive : MonoBehaviour
     {
         Container containerBottom = Instantiate(containerPref, transform);
         containerBottom.transform.localPosition += gap;
-        containerBottom.RandomizeValue();
+        containerBottom.SetValue(0);
         array[x, y] = containerBottom;
     }
 
@@ -101,6 +101,24 @@ public class Locomotive : MonoBehaviour
         return prefArray;
     }
 
+    private int[] DecreaseLength()
+    {
+        // Simpan nilai-nilai yang ada sekarang ke dalam array int
+        int[] values = new int[x];
+        for (int i = 0; i < x; i++)
+        {
+            values[i] = array[i, 0].value;
+            Destroy(array[i, 0].gameObject); // Bersihkan objek lama
+        }
+
+        x--; // Kurangi ukuran
+        array = new Container[x, y]; // Inisialisasi ulang array dengan ukuran baru
+
+        GenerateTrains(); // Spawn ulang kereta secara visual
+
+        return values;
+    }
+
     public void AddFirst()
     {
         Container[] prefArray = IncreaseLength();
@@ -120,9 +138,36 @@ public class Locomotive : MonoBehaviour
             array[i, 0].SetValue(prefArray[i].value);
         }
     }
+    public void RemoveFirst()
+    {
+        if (x <= 0) return; // Proteksi jika array kosong
+
+        int[] oldValues = DecreaseLength();
+
+        // Karena RemoveFirst, kita ambil nilai dari index 1 (skip index 0)
+        // Lalu masukkan ke array baru mulai dari index 0
+        for (int i = 0; i < x; i++)
+        {
+            array[i, 0].SetValue(oldValues[i + 1]);
+        }
+    }
+
+    public void RemoveLast()
+    {
+        if (x <= 0) return;
+
+        int[] oldValues = DecreaseLength();
+
+        // Karena RemoveLast, kita ambil nilai dari index 0 sampai x (panjang baru)
+        // Index terakhir dari oldValues otomatis terbuang
+        for (int i = 0; i < x; i++)
+        {
+            array[i, 0].SetValue(oldValues[i]);
+        }
+    }
 
     private void OnDestroy()
     {
-        ArrayListEventListener.AddValue -= SetContainerValue;
+        EventListener.AddValue -= SetContainerValue;
     }
 }

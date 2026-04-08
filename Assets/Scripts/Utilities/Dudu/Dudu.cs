@@ -25,7 +25,8 @@ public class Dudu : MonoBehaviour
 
     private void Start()
     {
-        if (AuthManager.user != null) ShowDudu($"Hello {AuthManager.user.DisplayName}!");
+        if (AuthManager.Instance && AuthManager.Instance.User != null) 
+            ShowDudu($"Hello {AuthManager.Instance.User.DisplayName}!");
         else ShowDudu("Hello user!");
     }
 

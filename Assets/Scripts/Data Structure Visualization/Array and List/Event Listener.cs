@@ -1,0 +1,31 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class EventListener
+{
+    // Segmented
+    public static Action<Vector2Int> CreateArray; // Array and List
+    public static Action<Vector2Int, int> AddValue; // Array and List
+    public static Action<ArrayDimension> ChangeDimension; // Array
+    public static Action<OperatorMode> ChangeMode; // Array and List
+
+    // Many
+    public static Action<int> AddFirst, AddLast; // Except Array
+    public static Action RemoveFirst, RemoveLast; // Except Array
+    public static Action DeleteArray, IsEmpty; // All
+    public static Action<int> GetSize; // All
+}
+
+public enum OperatorMode
+{
+    Create,
+    SetValue
+}
+
+public enum ArrayDimension
+{
+    OneDimension,
+    TwoDimension
+}

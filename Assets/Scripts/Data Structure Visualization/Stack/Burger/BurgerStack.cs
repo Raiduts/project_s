@@ -36,7 +36,7 @@ public class BurgerStack : MonoBehaviour
 
         part.FadeIn();
 
-        part.transform.DOMoveY(prefPosition + part.GetTransformOffset() + 0.5f, 1).SetEase(Ease.OutQuad).OnComplete(()=> 
+        part.transform.DOMoveY(prefPosition + 0.75f, 1).SetEase(Ease.OutQuad).OnComplete(()=> 
         {
             isOperating!(false);
 
