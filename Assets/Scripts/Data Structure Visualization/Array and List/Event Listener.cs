@@ -5,6 +5,8 @@ using UnityEngine;
 
 public static class EventListener
 {
+    // Data Structure
+
     // Segmented
     public static Action<Vector2Int> CreateArray; // Array and List
     public static Action<Vector2Int, int> AddValue; // Array and List
@@ -16,6 +18,9 @@ public static class EventListener
     public static Action RemoveFirst, RemoveLast; // Except Array
     public static Action DeleteArray, IsEmpty; // All
     public static Action<int> GetSize; // All
+
+    // Utilities
+    public static Action<DashboardPage> ChangeDashboardPage;
 }
 
 public enum OperatorMode
@@ -28,4 +33,12 @@ public enum ArrayDimension
 {
     OneDimension,
     TwoDimension
+}
+
+[Serializable]
+public enum DashboardPage
+{
+    Leaderboard,
+    Home,
+    Game
 }

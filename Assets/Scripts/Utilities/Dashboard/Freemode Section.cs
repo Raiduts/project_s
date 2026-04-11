@@ -20,16 +20,54 @@ public class FreemodeSection : MonoBehaviour
 
     public void OpenGameSection()
     {
-        print($"Open {gameObject.name}");
         freemodeCanvas.gameObject.SetActive(true);
-        backgroundImage.DOFade(0.75f, 0.5f).From(0);
-        panelTransform.DOLocalMoveY(0, 0.5f).From(1500).SetEase(Ease.OutBack);
+
+        Sequence seq = DOTween.Sequence();
+
+        // Background fade (lebih smooth masuk)
+        seq.Join(
+            backgroundImage.DOFade(0.75f, 0.4f)
+            .From(0)
+            .SetEase(Ease.OutQuad)
+        );
+
+        // Panel masuk dari bawah + sedikit overshoot
+        seq.Join(
+            panelTransform.DOLocalMoveY(0, 0.6f)
+            .From(1200)
+            .SetEase(Ease.OutBack, 1.2f)
+        );
+
+        // Scale dikit biar kerasa "pop"
+        panelTransform.localScale = Vector3.one * 0.9f;
+        seq.Join(
+            panelTransform.DOScale(1f, 0.5f)
+            .SetEase(Ease.OutBack)
+        );
     }
 
     public void CloseGameSection()
     {
-        backgroundImage.DOFade(0, 0.25f);
-        panelTransform.DOLocalMoveY(1500, 0.25f).SetEase(Ease.InQuad).OnComplete(() => 
+        Sequence seq = DOTween.Sequence();
+
+        // Background fade out (cepet tapi halus)
+        seq.Join(
+            backgroundImage.DOFade(0, 0.25f)
+            .SetEase(Ease.InQuad)
+        );
+
+        // Panel turun + sedikit shrink
+        seq.Join(
+            panelTransform.DOLocalMoveY(1200, 0.35f)
+            .SetEase(Ease.InBack)
+        );
+
+        seq.Join(
+            panelTransform.DOScale(0.9f, 0.25f)
+            .SetEase(Ease.InQuad)
+        );
+
+        seq.OnComplete(() =>
         {
             freemodeCanvas.gameObject.SetActive(false);
         });

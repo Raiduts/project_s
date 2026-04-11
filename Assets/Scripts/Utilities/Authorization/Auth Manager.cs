@@ -27,6 +27,7 @@ public class AuthManager : MonoBehaviour
         }
 
         Instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 

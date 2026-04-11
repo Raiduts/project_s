@@ -94,5 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da97242619accce4684115e3bebd6ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questTitle: Ubah operator menjadi mode 2D
+  questTitle: Ubah Dimensi
   questObjective: Klik tombol ubah dimensi 1D/2D untuk mengubah dimensi array
+  duduComment: 
+  tips: {fileID: 0}

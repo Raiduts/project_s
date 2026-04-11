@@ -17,8 +17,10 @@ public class QuestManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI questObjective;
     private LevelData questLevel;
+
     private Queue<QuestBase> quests;
     private QuestBase currentQuest;
+
     private int currentQuestId;
 
     private bool isStarting;
@@ -119,5 +121,15 @@ public class QuestManager : MonoBehaviour
     public bool CheckQuest(QuestBase quest)
     {
         return quest == currentQuest && isStarting;
+    }
+
+    private void OnDestroy()
+    {
+        if (questLevel)
+        {        
+            Destroy(questLevel.gameObject);
+        }
+
+        QuestEvent.CompletedLevel -= OnCompleteQuest;
     }
 }
