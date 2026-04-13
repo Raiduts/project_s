@@ -1177,6 +1177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: == Dudu The Trainer ==
       objectReference: {fileID: 0}
+    - target: {fileID: 1109339464346809750, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2741264773952511238, guid: 860ae7a0c636bad449054752d387e976, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.035414338
@@ -1216,6 +1220,42 @@ PrefabInstance:
     - target: {fileID: 2741264773952511238, guid: 860ae7a0c636bad449054752d387e976, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7cdd524ed8c2dc34d954d68b4ff8eed3, type: 3}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687507972066366407, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313723229522510845, guid: 860ae7a0c636bad449054752d387e976, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
