@@ -7,7 +7,8 @@ using Firebase.Firestore;
 public class JoinSessionStudent : MonoBehaviour
 {
     [Header("UI Reference")]
-    public TMP_InputField codeInputField; // Tempat siswa ngetik kode
+    [SerializeField]
+    private TMP_InputField codeInputField; // Tempat siswa ngetik kode
     public Button joinRoomButton;
     public TextMeshProUGUI errorText; // Teks buat munculin "Kode Salah"
     public string quizSceneName; // Ganti ke nama scene kuis-mu
