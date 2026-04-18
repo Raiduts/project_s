@@ -44,8 +44,8 @@ public class QuizStudent : MonoBehaviour
         Debug.Log($"Berhasil ambil {localQuestions.Count} soal.");
 
         // Test
-        QuestionStudent.Instance.ShowQuestion(localQuestions[0]);
         QuestionStudent.Instance.localQuestions = localQuestions;
+        QuestionStudent.Instance.ShowQuestion(localQuestions[0]);
     }
 
     public void ShuffleQuestions(List<QuestionData> list)

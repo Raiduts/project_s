@@ -32,8 +32,18 @@ public class QuestionStudent : MonoBehaviour
     [Header("Options")]
     [SerializeField]
     private Transform optionGrid;
+    [SerializeField]
+    private QuizOption quizOptionPref;
+    private QuizOption[] quizOptions;
     private string[] options;
     private string currentAnswerKey;
+    private int selectedOptionKey, answerOptionKey;
+
+    [Header("PopUp")]
+    [SerializeField]
+    private QuizPopUpReveal popUpReveal;
+
+    private bool isAnswering, isChanging;
 
     //Test
     [SerializeField]
@@ -50,7 +60,7 @@ public class QuestionStudent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timerValue = 30;
+        timerValue = 15;
 
         UpdateScoreText(0);
 
@@ -65,18 +75,27 @@ public class QuestionStudent : MonoBehaviour
 
     private void Update()
     {
-        timerValue -= Time.deltaTime;
-
-        timerSlider.value = timerValue / 30;
-
-        if (timerValue <= 0)
+        if (!isAnswering)
         {
-            NextQuestion();
+            timerValue -= Time.deltaTime;
+
+            timerSlider.value = timerValue / 15;            
+        }
+
+        if (timerValue <= 0 && !isChanging)
+        {
+            isChanging = true;
+
+            Answer();
         }
     }
 
     private void NextQuestion()
     {
+        isChanging = true;
+
+        ResetOption();
+
         currentQuestionNumber++;
 
         if (currentQuestionNumber >= localQuestions.Count)
@@ -90,64 +109,154 @@ public class QuestionStudent : MonoBehaviour
 
     public void ShowQuestion(QuestionData questionData)
     {
-        timerValue = 30;
+        // Reset Answer
+        selectedOptionKey = -1;
+        isAnswering = false;
+        isChanging = false;
 
+        // Reset Timer
+        timerValue = 15;
+
+        // Set Question
         questionText.text = questionData.questionText;
 
-        questionNumberText.text = $"{currentQuestionNumber + 1}";
+        // Set Number
+        questionNumberText.text = $"{currentQuestionNumber + 1}/{localQuestions.Count}";
 
+        // Get Options Text
         options = questionData.options.Split(';');
-
+        
+        // Set Answer Key String (erasable)
         currentAnswerKey = options[questionData.answerKey];
 
-        print(currentAnswerKey);
+        // Set Answer Key Int
+        answerOptionKey = questionData.answerKey;
 
+        // Set Options Text to Options Prefab
         InsertOptionsText();
     }
 
     private void InsertOptionsText()
     {
-        for (int i = 0; i < options.Length; i++)
+        int index = 0;
+
+        quizOptions = new QuizOption[options.Length];
+
+        foreach(string optionText in options)
         {
-            optionText[i].text = options[i];
+            QuizOption quizOptionTemp = Instantiate(quizOptionPref, optionGrid);
+            quizOptionTemp.SetText(optionText);
+            quizOptionTemp.SetOptionIndex(index);
+
+            // Add To Array
+            quizOptions[index] = quizOptionTemp;
+
+            // Dont Forget To UnSub
+            quizOptionTemp.ChooseOption += SelectOption;
+
+            // Increment
+            index++;
+            //optionText[i].text = options[i];
         }
     }
 
     public void SelectOption(int index)
     {
-        PlayerPrefs.SetString("SelectedOption", options[index]);
+        if (isAnswering)
+        {
+            return;
+        }
+
+        selectedOptionKey = index;
+        
+        quizOptions[selectedOptionKey].Bounce();
+
+        Answer();
+        //PlayerPrefs.SetString("SelectedOption", options[index]);
     }
 
     public void Answer()
     {
-        if (!PlayerPrefs.HasKey("SelectedOption"))
-            return;
+        //if (selectedOptionKey == -1)
+        //    return;
 
+
+        isAnswering = true;
+
+        HideOtherOption();
+
+        Invoke(nameof(RevealAnswer), 1f);
+    }
+
+    private void RevealAnswer()
+    {
         if (CheckAnswer())
         {
             CalculateScore();
         }
         else
         {
-            print("Salah");
+            popUpReveal.SetText("Kamu Salah\nDASAR BODOH!");
+            popUpReveal.ShowPopUp();
+
+            if (selectedOptionKey != -1)
+            {   
+                quizOptions[selectedOptionKey].TurnRed();
+            }
+        }
+        
+        quizOptions[answerOptionKey].ShowOption();
+
+        quizOptions[answerOptionKey].TurnGreen();
+
+        Invoke(nameof(NextQuestion), 2f);
+    }
+
+    private void HideOtherOption()
+    {
+        for (int i = 0; i < quizOptions.Length; i++)
+        {
+            if (i == selectedOptionKey)
+            {
+                continue;
+            }
+
+            quizOptions[i].HideOption();
+        }
+    }
+
+    private void ResetOption()
+    {
+        if (quizOptions.Length == 0)
+        {
+            return;
         }
 
-        NextQuestion();
-
-        PlayerPrefs.DeleteKey("SelectedOption");
+        foreach (QuizOption option in quizOptions)
+        {
+            option.ChooseOption -= SelectOption;
+            Destroy(option.gameObject);
+        }
     }
 
     private void CalculateScore()
     {
-        int tempScore = (int) timerValue * 10;
+        int tempScore = (int) (timerValue * 100);
 
-        QuizScoringStudent.Instance.AddScore(tempScore);
+        //QuizScoringStudent.Instance.AddScore(tempScore);
+
+        popUpReveal.SetText("Kamu Benar", tempScore);
+        popUpReveal.ShowPopUp();
     }
 
     private bool CheckAnswer()
     {
-        string selectedOption = PlayerPrefs.GetString("SelectedOption");
+        if (selectedOptionKey == -1)
+        {
+            return false;
+        }
+        //string selectedOption = PlayerPrefs.GetString("SelectedOption");
 
-        return selectedOption.Equals(currentAnswerKey);
+        return selectedOptionKey == answerOptionKey;
     }
 }
