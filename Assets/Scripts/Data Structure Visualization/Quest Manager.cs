@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -44,6 +45,8 @@ public class QuestManager : MonoBehaviour
     {
         questLevel = FindAnyObjectByType<LevelData>();
 
+        //print(questLevel.name);
+
         if (questLevel == null)
         {
             return;
@@ -64,6 +67,7 @@ public class QuestManager : MonoBehaviour
     public void OnCompleteQuest()
     {
         questInfo.HideQuestInfo();
+        print(quests.Count);
 
         if (quests.Count > 0)
         {
@@ -78,6 +82,29 @@ public class QuestManager : MonoBehaviour
     private void EndQuest()
     {
         QuestEvent.CompletedLevel?.Invoke();
+
+        DSType campaignDSType = UserData.Instance.campaignDSType;
+
+        int newLevel = questLevel.level + 1;
+
+        switch (campaignDSType)
+        {
+            case DSType.Array:
+                UserData.Instance.arrayLevel = newLevel;
+                break;
+            case DSType.Linkedlist:
+                UserData.Instance.linkedlistLevel = newLevel;
+                break;
+            case DSType.Stack:
+                UserData.Instance.stackLevel = newLevel;
+                break;
+            case DSType.Queue:
+                UserData.Instance.queueLevel = newLevel;
+                break;
+        }
+
+        UserData.Instance.SaveProgress();
+
         print("LEVEL COMPLETED");
     }
 
@@ -125,11 +152,11 @@ public class QuestManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        QuestEvent.CompletedQuest -= OnCompleteQuest;
+
         if (questLevel)
         {        
             Destroy(questLevel.gameObject);
         }
-
-        QuestEvent.CompletedLevel -= OnCompleteQuest;
     }
 }

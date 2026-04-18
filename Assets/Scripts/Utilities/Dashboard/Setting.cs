@@ -29,18 +29,18 @@ public class Setting : MonoBehaviour
     {
         backgroundImage.DOFade(0, 0.5f).From();
         settingPanel.transform.DOMoveY(2000, 0.5f).From();
-        backButton.transform.DOMoveX(-1000, 0.5f).From();
+        //backButton.transform.DOMoveX(-1000, 0.5f).From();
     }
 
     private void CloseSetting()
     {
         OnCloseSetting?.Invoke();
         backgroundImage.DOFade(0, 0.5f);
-        settingPanel.transform.DOMoveY(2000, 0.5f);
-        backButton.transform.DOMoveX(-1000, 0.5f).OnComplete(() =>
+        settingPanel.transform.DOMoveY(2000, 0.5f).OnComplete(() =>
         {
             Destroy(gameObject);
         });
+        //backButton.transform.DOMoveX(-1000, 0.5f)
     }
 
     public void Logout()

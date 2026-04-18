@@ -93,7 +93,10 @@ public class FreemodeSection : MonoBehaviour
     {
         CloseGameSection();
 
-        PlayerPrefs.SetInt("campaignType", campaignType);
+        //PlayerPrefs.SetInt("campaignType", campaignType);
+
+        UserData.Instance.campaignDSType = (DSType) campaignType;
+
         MySceneManager.instance.ChangeScene("Campaign");
     }
 }

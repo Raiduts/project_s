@@ -6,6 +6,7 @@ using Firebase.Extensions;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Firebase.Auth;
 
 public class WaitingRoom : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class WaitingRoom : MonoBehaviour
     public GameObject playerItemPrefab;
 
     private FirebaseFirestore db;
+    private FirebaseAuth auth;
+
     [SerializeField]
     private QuizSceneManager quizSceneManager;
 
@@ -23,9 +26,12 @@ public class WaitingRoom : MonoBehaviour
     private string roomCreatorEmail;
     private string currentUserEmail;
 
+    ListenerRegistration playerListener;
+
     void Start()
     {
         db = FirebaseFirestore.DefaultInstance;
+        auth = FirebaseAuth.DefaultInstance;
 
         roomCode = PlayerPrefs.GetString("Code");
         currentUserEmail = AuthManager.Instance.User().Email; 
@@ -34,8 +40,34 @@ public class WaitingRoom : MonoBehaviour
         startButton.gameObject.SetActive(false);
         startButton.onClick.AddListener(OnClickStart);
 
+        JoinWaitingRoom();
         CheckRoomOwner();
-        LoadPlayers();
+        ListenPlayers();
+    }
+
+    public void JoinWaitingRoom()
+    {
+        string userEmail = auth.CurrentUser.Email;
+        string userName = auth.CurrentUser.DisplayName;
+        int iconIndex = PlayerPrefs.GetInt("IconIndex");
+
+        if (userEmail == "" || userName == "")
+        {
+            userEmail = "anonymous@gmail.com";
+            userName = "anonymous";
+        }
+
+        DocumentReference scoreRef = db.Collection("Quizzes").Document(roomCode)
+                                       .Collection("Leaderboard").Document(userEmail);
+
+        Dictionary<string, object> data = new Dictionary<string, object> {
+            { "name", userName },
+            { "iconIndex", iconIndex },
+            { "lastUpdated", FieldValue.ServerTimestamp }
+        };
+
+        // SetAsync dengan Merge agar tidak menimpa data lain jika ada
+        scoreRef.SetAsync(data, SetOptions.MergeAll);
     }
 
     void CheckRoomOwner()
@@ -78,45 +110,48 @@ public class WaitingRoom : MonoBehaviour
         return roomCreatorEmail == currentUserEmail;
     }
 
-    void LoadPlayers()
+    void ListenPlayers()
     {
         CollectionReference leaderboardRef = db
             .Collection("Quizzes")
             .Document(roomCode)
             .Collection("Leaderboard");
 
-        leaderboardRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        playerListener = leaderboardRef.Listen(snapshot =>
         {
-            if (task.IsCompleted)
+            // clear dulu biar ga duplicate
+            foreach (Transform child in playerContainer)
             {
-                QuerySnapshot snapshot = task.Result;
+                Destroy(child.gameObject);
+            }
 
-                foreach (DocumentSnapshot doc in snapshot.Documents)
-                {
-                    string playerId = doc.Id;
-                    string playerName = doc.GetValue<string>("name");
+            foreach (DocumentSnapshot doc in snapshot.Documents)
+            {
+                string playerId = doc.Id;
+                string playerName = doc.GetValue<string>("name");
+                int playerIcon = doc.ContainsField("iconIndex") ? doc.GetValue<int>("iconIndex") : 0;
 
-                    print(playerName);
+                // Debug.Log(playerName);
 
-                    // skip creator
-                    if (playerId == currentUserEmail)
-                        continue;
+                // skip creator
+                if (playerId == roomCreatorEmail)
+                    continue;
 
-                    SpawnPlayer(playerName);
-                }
+                SpawnPlayer(playerName, playerIcon);
             }
         });
     }
 
-    void SpawnPlayer(string playerName)
+    void SpawnPlayer(string playerName, int iconIndex)
     {
         GameObject obj = Instantiate(playerItemPrefab, playerContainer);
 
         // asumsi prefab punya script sendiri
         PlayerItem item = obj.GetComponent<PlayerItem>();
+
         if (item != null)
         {
-            item.SetData(playerName);
+            item.SetData(playerName, iconIndex);
         }
     }
 

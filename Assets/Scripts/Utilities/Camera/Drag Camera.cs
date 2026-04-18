@@ -48,4 +48,9 @@ public class DragCamera : MonoBehaviour
         }
 #endif
     }
+
+    private void OnDestroy()
+    {
+        cloud.DOKill();
+    }
 }

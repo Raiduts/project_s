@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CampaignLevelManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class CampaignLevelManager : MonoBehaviour
     [SerializeField]
     private Transform contentView;
     private int selectedLevelInt;
+    private int currentUnlockedLevel;
 
     [Header("Level")]
     [SerializeField]
@@ -28,12 +30,12 @@ public class CampaignLevelManager : MonoBehaviour
     
     private LevelData[] currentLevelData;
 
-    private int selectedCampaign;
+    private DSType selectedCampaign;
     private string[] sceneNames = { "Array","Linkedlist","Stack","Queue"};
 
     private void Start()
     {
-        selectedCampaign = PlayerPrefs.GetInt("campaignType");
+        selectedCampaign = UserData.Instance.campaignDSType;
 
         levelButtons = new List<LevelButton>();
 
@@ -41,17 +43,21 @@ public class CampaignLevelManager : MonoBehaviour
 
         switch(selectedCampaign)
         {
-            case 0:
+            case DSType.Array:
                 currentLevelData = ArrayQuest;
+                currentUnlockedLevel = UserData.Instance.arrayLevel;
                 break;
-            case 1:
+            case DSType.Linkedlist:
                 currentLevelData = LinkedlistQuest;
+                currentUnlockedLevel = UserData.Instance.linkedlistLevel;
                 break;
-            case 2:
+            case DSType.Stack:
                 currentLevelData = StackQuest;
+                currentUnlockedLevel = UserData.Instance.stackLevel;  
                 break;
-            case 3:
+            case DSType.Queue:
                 currentLevelData = QueueQuest;
+                currentUnlockedLevel = UserData.Instance.queueLevel;
                 break;
         }
 
@@ -77,20 +83,28 @@ public class CampaignLevelManager : MonoBehaviour
             tempButton.SetLevel(i + 1);
             tempButton.OnSelectLevel += SelectLevel;
             tempButton.Reposition(pos);
+
+            bool isUnlocked = i <= currentUnlockedLevel;
+
+            // Set Interactable
+            tempButton.SetInteractable(isUnlocked);
+
+            // Set Level Data
+            currentLevelData[i].level = i;
         }
     }
 
     public void SelectLevel(int x) 
     { 
-        DeselectPrev(selectedLevelInt);
         selectedLevelInt = x;
+        DeselectPrev(selectedLevelInt);
     }
 
     private void DeselectPrev(int x)
     {
         foreach (LevelButton item in levelButtons)
         {
-            if (item.GetLevel() == x)
+            if (item.GetLevel() != selectedLevelInt)
             {
                 item.Deselect();
             }
@@ -106,7 +120,7 @@ public class CampaignLevelManager : MonoBehaviour
 
         print($"Starting Level {selectedLevelInt}");
 
-        MySceneManager.instance.ChangeScene(sceneNames[selectedCampaign]);
+        MySceneManager.instance.ChangeScene(sceneNames[(int) selectedCampaign]);
 
         LevelData selectedLevel = Instantiate(currentLevelData[selectedLevelInt - 1]);
         DontDestroyOnLoad(selectedLevel);

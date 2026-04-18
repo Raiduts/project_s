@@ -27,6 +27,11 @@ public class LevelButton : MonoBehaviour
         textNumber.text = level.ToString();
     }
 
+    public void SetInteractable(bool isInteractable)
+    {
+        button.interactable = isInteractable;
+    }
+
     public int GetLevel() 
     { 
         return level; 

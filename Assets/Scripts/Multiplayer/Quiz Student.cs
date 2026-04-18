@@ -74,6 +74,7 @@ public class QuizStudent : MonoBehaviour
     {
         string userEmail = auth.CurrentUser.Email;
         string userName = auth.CurrentUser.DisplayName;
+        int iconIndex = UserData.Instance.iconIndex;
 
         if (userEmail == "" || userName == "")
         {
@@ -87,6 +88,7 @@ public class QuizStudent : MonoBehaviour
         Dictionary<string, object> data = new Dictionary<string, object> {
             { "name", userName },
             { "score", currentScore },
+            { "iconIndex", iconIndex },
             { "lastUpdated", FieldValue.ServerTimestamp }
         };
 

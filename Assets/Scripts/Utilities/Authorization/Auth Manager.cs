@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Firestore;
+using System.Collections.Generic;
 
 public class AuthManager : MonoBehaviour
 {
@@ -82,7 +84,7 @@ public class AuthManager : MonoBehaviour
 
     private void AuthStateChanged(object sender, EventArgs e)
     {
-        print(auth);
+        Debug.Log(auth);
 
         if (auth == null) return;
 
@@ -102,15 +104,11 @@ public class AuthManager : MonoBehaviour
 
         if (signedIn)
         {
-            ui.usernameText.text = $"Hello, {user.DisplayName}";
-            Debug.Log($"Signed In: {user.Email}");
-
             ui.CloseAuth();
             LoggedIn?.Invoke();
         }
         else
         {
-            Debug.Log("Signed Out");
             ui.OpenAuth();
         }
     }
@@ -129,7 +127,7 @@ public class AuthManager : MonoBehaviour
 
         if (task.Exception != null)
         {
-            Debug.LogError("Login Failed");
+            Debug.LogError($"Login Failed : {task.Exception}");
         }
         else
         {

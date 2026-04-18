@@ -8,7 +8,7 @@ public class Navigate : MonoBehaviour
     [Header("UI")]
     private Canvas canvas;
     [SerializeField]
-    private Transform homePanel;
+    private RectTransform homePanel;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -22,12 +22,12 @@ public class Navigate : MonoBehaviour
 
     public void HideNav()
     {
-        homePanel.DOLocalMoveY(500, 0.5f);
+        homePanel.DOAnchorPosY(500, 0.5f);
     }
 
     public void ShowNav()
     {
-        homePanel.DOLocalMoveY(0, 0.5f);
+        homePanel.DOAnchorPosY(-540, 0.5f);
     }
 
     public void CreateSetting()

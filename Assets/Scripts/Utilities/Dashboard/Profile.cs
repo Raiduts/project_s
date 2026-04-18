@@ -7,12 +7,22 @@ using System;
 
 public class Profile : MonoBehaviour
 {
+    public static Profile Instance;
+
     [SerializeField] private Image backgroundImage;
     [SerializeField] private RectTransform profilePanel;
     [SerializeField] private RectTransform closeButton;
 
     private Vector2 hiddenPos;
     private Vector2 shownPos;
+
+    public Action<int> ChangeProfileIcon;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
 
     private void Start()
     {
@@ -54,5 +64,19 @@ public class Profile : MonoBehaviour
         // Turun lagi
         profilePanel.DOAnchorPos(hiddenPos, 0.3f)
             .SetEase(Ease.InBack);
+    }
+
+    public void ChangeIconById(int id)
+    {
+        //PlayerPrefs.SetInt("IconIndex", id);
+
+        //UserData.Instance.iconIndex = id;
+
+        ChangeProfileIcon?.Invoke(id);
+    }
+
+    private void OnDestroy()
+    {
+        EventListener.ChangeDashboardPage -= OnChangeDashboardPage;
     }
 }

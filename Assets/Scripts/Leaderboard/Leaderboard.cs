@@ -14,8 +14,7 @@ public class Leaderboard : MonoBehaviour
 
     public void Start()
     {
-        //AuthManager.Instance.LoggedIn += GetTop10;
-        GetTop10();
+        AuthManager.Instance.LoggedIn += GetTop10;
     }
 
     public void AddLeaderboard()
@@ -27,6 +26,11 @@ public class Leaderboard : MonoBehaviour
 
     public void GetTop10()
     {
+        foreach (Transform item in container)
+        {
+            Destroy(item.gameObject);
+        }
+
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
         db.Collection("Leaderboard")
@@ -42,6 +46,7 @@ public class Leaderboard : MonoBehaviour
                 foreach (var doc in task.Result.Documents)
                 {
                     string name = doc.GetValue<string>("name");
+
                     int score = doc.GetValue<int>("score");
 
                     UserScore tempUserScore = Instantiate(userScorePref);
@@ -52,7 +57,6 @@ public class Leaderboard : MonoBehaviour
 
                     tempUserScore.transform.localScale = Vector3.one;
 
-                    //Debug.Log(rank + ". " + name + " - " + score);
                     rank++;
                 }
             }
@@ -72,8 +76,6 @@ public class Leaderboard : MonoBehaviour
 
         docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
-            print($"2{task.Result}");
-
             if (task.Result.Exists)
             {
                 int oldScore = task.Result.GetValue<int>("score");
@@ -95,7 +97,11 @@ public class Leaderboard : MonoBehaviour
                     { "score", score }
                 });
             }
-            print("done");
         });
+    }
+
+    private void OnDestroy()
+    {
+        AuthManager.Instance.LoggedIn -= GetTop10;
     }
 }
