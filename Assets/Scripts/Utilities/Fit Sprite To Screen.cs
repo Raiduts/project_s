@@ -1,7 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FitSpriteToScreen : MonoBehaviour
 {
+    public bool doLeft = true;
+
     void Start()
     {
         FitToScreen();
@@ -19,9 +21,25 @@ public class FitSpriteToScreen : MonoBehaviour
         float scaleX = worldWidth / spriteSize.x;
         float scaleY = worldHeight / spriteSize.y;
 
-        // Pilih max biar nutup layar (cover)
         float scale = Mathf.Max(scaleX, scaleY);
 
         transform.localScale = new Vector3(scale, scale, 1f);
+
+        if (!doLeft)
+        {
+            return;
+        }
+
+        // 🔥 Anchor ke kiri
+        float spriteWorldWidth = spriteSize.x * scale;
+
+        float leftEdgeScreen = -worldWidth / 2f;
+        float spriteLeftOffset = spriteWorldWidth / 2f;
+
+        transform.position = new Vector3(
+            leftEdgeScreen + spriteLeftOffset,
+            transform.position.y,
+            transform.position.z
+        );
     }
 }

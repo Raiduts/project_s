@@ -17,13 +17,6 @@ public class Leaderboard : MonoBehaviour
         AuthManager.Instance.LoggedIn += GetTop10;
     }
 
-    public void AddLeaderboard()
-    {
-        int point = Random.Range(0, 100) * 10;
-
-        SaveFinalScore(point);
-    }
-
     public void GetTop10()
     {
         foreach (Transform item in container)
@@ -59,43 +52,6 @@ public class Leaderboard : MonoBehaviour
 
                     rank++;
                 }
-            }
-        });
-    }
-
-    public void SaveFinalScore(int score)
-    {
-        string email = $"user{Random.Range(0, 100)}{Random.Range(0, 100)}{Random.Range(0, 100)}@gmail.com";
-
-        string playerName = AuthManager.Instance.User().DisplayName;
-
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-
-        DocumentReference docRef =
-        db.Collection("Leaderboard").Document(email);
-
-        docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.Result.Exists)
-            {
-                int oldScore = task.Result.GetValue<int>("score");
-
-                if (score > oldScore)
-                {
-                    docRef.SetAsync(new Dictionary<string, object>()
-                    {
-                        {"name", email },
-                        { "score", score }
-                    });
-                }
-            }
-            else
-            {
-                docRef.SetAsync(new Dictionary<string, object>()
-                {
-                    {"name", email },
-                    { "score", score }
-                });
             }
         });
     }

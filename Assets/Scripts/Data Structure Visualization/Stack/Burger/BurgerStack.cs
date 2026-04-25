@@ -22,24 +22,32 @@ public class BurgerStack : MonoBehaviour
 
     public void PushBurger(BurgerPart part)
     {
-        isOperating!(true);
+        if (burgerStack.Count >= 9)
+        {
+            CodePrinter.Instance.AddTextCode($"Can't add more item (max 9)");
+            Destroy(part.gameObject);
+            return;
+        }
 
-        float prefPosition = burgerStack.Count > 0? burgerStack.Peek().transform.position.y : transform.position.y;
+        EventListener.AddFirst?.Invoke(part.id);
+
+        CodePrinter.Instance.AddTextCode($"stack.Push({part.GetName()})");
+
+        isOperating!(true);
 
         burgerStack.Push(part);
 
         part.transform.SetParent(partsContainer, false);
 
-        Vector3 spawnPosition = new(transform.position.x, prefPosition + 5, burgerStack.Count * -0.25f);
-
-        part.transform.position = spawnPosition;
+        part.transform.position = new(transform.position.x, transform.position.y + (5 * burgerStack.Count), burgerStack.Count * -0.25f);
 
         part.FadeIn();
 
-        part.transform.DOMoveY(prefPosition + 0.75f, 1).SetEase(Ease.OutQuad).OnComplete(()=> 
+        part.transform.DOMoveY(0.75f * burgerStack.Count - 2, 1).SetEase(Ease.OutQuad).OnComplete(()=> 
         {
             isOperating!(false);
 
+            EventListener.Edited?.Invoke(GetIntData());
             //if (burgerTemp.Count == 0)
             //{
             //    PopBurger();
@@ -56,13 +64,13 @@ public class BurgerStack : MonoBehaviour
      
         BurgerPart part = burgerStack.Pop();
 
+        EventListener.Edited?.Invoke(GetIntData());
+
         part.FadeOut(0.5f); 
         
         part.transform.DOMoveY(part.transform.position.y + 5, 1).SetEase(Ease.OutQuad).OnComplete(() =>
         {
             isOperating!(false);
-
-            // Destroy(part.gameObject);
         });
 
         return part;
@@ -81,5 +89,20 @@ public class BurgerStack : MonoBehaviour
     public bool IsEmpty()
     {
         return GetSize() == 0;
+    }
+
+    private int[,] GetIntData()
+    {
+        int[,] data = new int[burgerStack.Count, 1];
+
+        int index = 0;
+
+        foreach (BurgerPart item in burgerStack)
+        {
+            data[index, 0] = item.id;
+            index++;
+        }
+
+        return data;
     }
 }

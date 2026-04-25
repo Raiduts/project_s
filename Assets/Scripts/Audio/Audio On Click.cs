@@ -15,6 +15,10 @@ public class ButtonSound : MonoBehaviour
 
     void PlaySound()
     {
-        AudioManager.Instance.PlaySFX(soundType);
+        if (AudioManager.Instance)
+        {        
+            AudioManager.Instance.PlaySFX(soundType);
+        }
+
     }
 }

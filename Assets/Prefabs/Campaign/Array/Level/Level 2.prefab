@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4afb0a86418331547a178c0435929bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   questsSerialized:
-  - {fileID: 5590483630800308217, guid: 8f8ef90d8cc3a014b9dfab98fea72a8d, type: 3}
-  - {fileID: 5649570389650879691, guid: 8c87af01fe5d66f42abae55531c4108c, type: 3}
-  - {fileID: 5507478212661007312, guid: 60795d0403735ff4bb5ee0447baef237, type: 3}
+  - {fileID: -4753826225478713426, guid: 8f8ef90d8cc3a014b9dfab98fea72a8d, type: 3}
+  - {fileID: -4753826225478713426, guid: a4464161e81d914499f5fc402880b2b9, type: 3}
+  duduText: kali ini kita akan belajar manipulasi nilai atau value pada index yang
+    ada di Array

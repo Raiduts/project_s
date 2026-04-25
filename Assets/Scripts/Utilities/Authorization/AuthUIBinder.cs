@@ -18,7 +18,7 @@ public class AuthUIBinder : MonoBehaviour
     public TMP_InputField confirmPasswordTextField;
 
     [Header("UI")]
-    public TextMeshProUGUI usernameText;
+    //public TextMeshProUGUI usernameText;
     public Image authPanel;
     public RectTransform closeButton;
 

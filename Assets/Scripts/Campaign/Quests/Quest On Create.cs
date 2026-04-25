@@ -12,9 +12,7 @@ public class QuestOnCreate : QuestBase
     {
         if (vector == requiredSize && QuestManager.instance.CheckQuest(this))
         {
-            Dudu.Instance.ShowDudu(duduComment);
-
-            QuestEvent.CompletedQuest?.Invoke();
+            QuestCompleted();
         }
     }
 }

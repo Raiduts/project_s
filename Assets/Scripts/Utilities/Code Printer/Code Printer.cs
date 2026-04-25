@@ -61,6 +61,16 @@ public class CodePrinter : MonoBehaviour
         {
             codeText.alignment = TextAlignmentOptions.BottomLeft;
         }
-        codeText.text += $"<system>: {text}\n";
+        codeText.text += $"<color=yellow>{text}</color>\n";
+    }
+
+    public void AddTextReturn(string text)
+    {
+        counter++;
+        if (counter == 8)
+        {
+            codeText.alignment = TextAlignmentOptions.BottomLeft;
+        }
+        codeText.text += $"<color=green>{text}</color>\n";
     }
 }

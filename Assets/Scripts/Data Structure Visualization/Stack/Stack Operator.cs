@@ -40,6 +40,12 @@ public class StackOperator : MonoBehaviour
         selectedPartPref = partsPref[partIndex];
     }
 
+    public void BypassPush(int id)
+    {
+        BurgerPart tempPart = Instantiate(partsPref[id], transform);
+        burgerStack.PushBurger(tempPart);
+    }
+
     public void PushByType()
     {
         if (isOperating || !selectedPartPref) return;
@@ -47,10 +53,6 @@ public class StackOperator : MonoBehaviour
         BurgerPart tempPart = Instantiate(selectedPartPref, transform);
 
         burgerStack.PushBurger(tempPart);
-
-        EventListener.AddFirst?.Invoke(0);
-
-        CodePrinter.Instance.AddTextCode($"stack.Push({burgerStack.GetTopPart().GetName()})");
     }
 
     public void PopBurger()
@@ -78,6 +80,8 @@ public class StackOperator : MonoBehaviour
     public void PeekBurger()
     {
         if (burgerStack.IsEmpty()) return;
+
+        EventListener.AccessData?.Invoke();
 
         CodePrinter.Instance.AddTextCode($"stack.Peek()");
 

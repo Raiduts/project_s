@@ -4,42 +4,45 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class CardQueue : MonoBehaviour
+public class FishQueue : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI numberText;
+    private string fishName;
+    public int id;
+
     [SerializeField]
     private SpriteRenderer cardRenderer;
-    private int number;
 
-    public int GetNumber()
+    //private int number;
+
+    public string GetName()
     {
-        return number;
+        return fishName;
     }
 
     private void Start()
     {
-        number = Random.Range(0, 100);
+        //number = Random.Range(0, 100);
 
-        numberText.text = number.ToString();
+        //numberText.text = number.ToString();
         SlideIn();
     }
 
     public void SlideIn()
     {
         DoFadeCard(0, 1);
-        transform.DOMoveX(transform.position.x + 5, 1).From().SetEase(Ease.OutQuad);
+        transform.DOMove(new Vector3(transform.position.x + 4, transform.position.y + 2.5f, 0), 1).From().SetEase(Ease.OutQuad);
     }
 
     public void SlideOut()
     {
         DoFadeCard(1, 0);
-        transform.DOMoveX(transform.position.x - 10,1).SetEase(Ease.InQuad);
+        transform.DOMove(new Vector3(transform.position.x - 4, transform.position.y - 2.5f, 0), 1).SetEase(Ease.InQuad);
     }
 
     public void DoFadeCard(float start, float end)
     {
         cardRenderer.DOFade(end, 0.5f).From(start).SetEase(Ease.OutBack).SetDelay(0.5f * start);
-        numberText.DOFade(end, 0.5f).From(start).SetEase(Ease.OutBack).SetDelay(0.5f * start);
+        //numberText.DOFade(end, 0.5f).From(start).SetEase(Ease.OutBack).SetDelay(0.5f * start);
     }
 }

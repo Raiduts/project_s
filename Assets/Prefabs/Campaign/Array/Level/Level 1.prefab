@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4afb0a86418331547a178c0435929bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   questsSerialized:
   - {fileID: 6370875755729798730, guid: cd5fbc37ce86b4047a6995f52c159dd6, type: 3}
-  - {fileID: 5507478212661007312, guid: 1646be150fcce4845a6efdb70281e73f, type: 3}
+  - {fileID: 4364500195160193243, guid: 1646be150fcce4845a6efdb70281e73f, type: 3}
+  duduText: selamat datang di Simulasi Array Kereta, dudu disini memandumu memahami
+    Array

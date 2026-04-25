@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class QuestBase : MonoBehaviour
@@ -18,8 +19,9 @@ public abstract class QuestBase : MonoBehaviour
 
     void Start()
     {
-        EventListener.AddValue += OnAddValue;
         EventListener.CreateArray += OnCreate;
+        EventListener.CreateList += OnCreateList;
+        EventListener.AddValue += OnAddValue;
         EventListener.ChangeMode += OnChangeMode;
         EventListener.ChangeDimension += OnChangeDimension;
         EventListener.AddFirst += OnAddFirst;
@@ -28,6 +30,17 @@ public abstract class QuestBase : MonoBehaviour
         EventListener.RemoveLast += OnRemoveLast;
         EventListener.GetSize += OnGetSize;
         EventListener.IsEmpty += IsEmpty;
+        EventListener.Edited += OnEdit;
+        EventListener.AccessData += OnAccessData;
+    }
+
+    public virtual void OnStartQuest()
+    {
+        TryShowTips();
+     
+        I_OnStartQuest onStartScript = GetComponent<I_OnStartQuest>();
+
+        onStartScript?.OnStartQuest();
     }
 
     public virtual void TryShowTips()
@@ -38,59 +51,37 @@ public abstract class QuestBase : MonoBehaviour
         }
     }
 
-    public virtual void IsEmpty()
+    public virtual void OnCreateList() { }
+
+    public virtual void IsEmpty() { }
+
+    public virtual void OnGetSize(int obj) { }
+
+    public virtual void OnRemoveLast() { }
+
+    public virtual void OnRemoveFirst() { }
+
+    public virtual void OnAccessData() { }
+
+    public virtual void OnAddLast(int obj) { }
+
+    public virtual void OnAddFirst(int obj) { }
+
+    public virtual void OnChangeDimension(ArrayDimension dimension) { }
+
+    public virtual void OnChangeMode(OperatorMode mode) { }
+
+    public virtual void OnCreate(Vector2Int vector) { }
+
+    public virtual void OnAddValue(Vector2Int vector, int value) { }
+
+    public virtual void OnEdit(int[,] data) { }
+
+    public void QuestCompleted()
     {
-        //throw new NotImplementedException();
-    }
+        Dudu.Instance.ShowDudu(duduComment);
 
-    public virtual void OnGetSize(int obj)
-    {
-        //throw new NotImplementedException();
-    }
-
-    public virtual void OnRemoveLast()
-    {
-        //throw new NotImplementedException();
-    }
-
-    public virtual void OnRemoveFirst()
-    {
-        //throw new NotImplementedException();
-    }
-
-    public virtual void OnStartQuest()
-    {
-
-    }
-
-    public virtual void OnAddLast(int obj)
-    {
-        //throw new NotImplementedException();
-    }
-
-    public virtual void OnAddFirst(int obj)
-    {
-        //throw new NotImplementedException();
-    }
-
-    public virtual void OnChangeDimension(ArrayDimension dimension)
-    {
-        //throw new NotImplementedException();
-    }
-
-    public virtual void OnChangeMode(OperatorMode mode)
-    {
-        //throw new NotImplementedException();
-    }
-
-    public virtual void OnCreate(Vector2Int vector)
-    {
-        // Created Data Structure
-    }
-
-    public virtual void OnAddValue(Vector2Int vector, int value) 
-    { 
-        // Added Value to Data Structure
+        QuestEvent.CompletedQuest?.Invoke();
     }
 }
 

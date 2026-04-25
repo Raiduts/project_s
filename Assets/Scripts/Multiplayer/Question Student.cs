@@ -11,43 +11,33 @@ public class QuestionStudent : MonoBehaviour
 
     // Test
     public List<QuestionData> localQuestions = new List<QuestionData>();
+    public GameObject quizObject;
 
     [Header("Timer")]
-    [SerializeField]
-    private Slider timerSlider;
+    [SerializeField] private Slider timerSlider;
     private Image timerBar;
     private float timerValue;
+    [SerializeField] private TextMeshProUGUI timerText;
 
     [Header("Score")]
-    [SerializeField]
-    private TextMeshProUGUI scoreText;
 
     [Header("Question")]
-    [SerializeField]
-    private TextMeshProUGUI questionText;
-    [SerializeField]
-    private TextMeshProUGUI questionNumberText;
+    [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private TextMeshProUGUI questionNumberText;
     private int currentQuestionNumber = 0;
 
     [Header("Options")]
-    [SerializeField]
-    private Transform optionGrid;
-    [SerializeField]
-    private QuizOption quizOptionPref;
+    [SerializeField] private Transform optionGrid;
+    [SerializeField] private QuizOption quizOptionPref;
     private QuizOption[] quizOptions;
     private string[] options;
     private string currentAnswerKey;
     private int selectedOptionKey, answerOptionKey;
 
     [Header("PopUp")]
-    [SerializeField]
-    private QuizPopUpReveal popUpReveal;
+    [SerializeField] private QuizPopUpReveal popUpReveal;
 
-    private bool isAnswering, isChanging;
-
-    //Test
-    [SerializeField]
-    private TextMeshProUGUI[] optionText;
+    private bool isAnswering, isChanging, isTicking = false;
 
     // Evnet
     public Action OnFinishQuiz;
@@ -60,26 +50,42 @@ public class QuestionStudent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        QuizCountdown.Instance.StartQuiz += OnStartQuiz;
+
+        //QuizScoringStudent.Instance.OnChangeScore += UpdateScoreText;
+    }
+
+    private void OnStartQuiz()
+    {
+        quizObject.SetActive(true);
+
         timerValue = 15;
 
-        UpdateScoreText(0);
+        isTicking = true;
 
-        QuizScoringStudent.Instance.OnChangeScore += UpdateScoreText;
+        ShowQuestion(localQuestions[0]);
     }
 
-    public void UpdateScoreText(int score)
-    {
-        scoreText.text = $"{score} poin";
-        //print(score);
-    }
+    //public void UpdateScoreText(int score)
+    //{
+    //    scoreText.text = $"{score} poin";
+    //    //print(score);
+    //}
 
     private void Update()
     {
+        if (!isTicking)
+        {
+            return;
+        }
+
         if (!isAnswering)
         {
             timerValue -= Time.deltaTime;
 
-            timerSlider.value = timerValue / 15;            
+            timerSlider.value = timerValue / 15;
+
+            timerText.text = $"{(int) timerValue} detik";
         }
 
         if (timerValue <= 0 && !isChanging)
@@ -145,6 +151,7 @@ public class QuestionStudent : MonoBehaviour
         foreach(string optionText in options)
         {
             QuizOption quizOptionTemp = Instantiate(quizOptionPref, optionGrid);
+
             quizOptionTemp.SetText(optionText);
             quizOptionTemp.SetOptionIndex(index);
 
@@ -243,7 +250,7 @@ public class QuestionStudent : MonoBehaviour
     {
         int tempScore = (int) (timerValue * 100);
 
-        //QuizScoringStudent.Instance.AddScore(tempScore);
+        QuizScoringStudent.Instance.AddScore(tempScore);
 
         popUpReveal.SetText("Kamu Benar", tempScore);
         popUpReveal.ShowPopUp();

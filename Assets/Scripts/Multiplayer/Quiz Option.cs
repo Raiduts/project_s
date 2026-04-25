@@ -13,11 +13,17 @@ public class QuizOption : MonoBehaviour
     private Image optionImage;
     private int optionIndex;
 
+    private Color textColor, optionColor;
+
     public Action<int> ChooseOption;
 
     private void Start()
     {
         optionImage = GetComponent<Image>();
+        textColor = optionText.color;
+        optionColor = optionImage.color;
+
+        SpawnOption();
     }
 
     public void ChooseThisOption()
@@ -55,6 +61,13 @@ public class QuizOption : MonoBehaviour
     {
         optionImage.DOFade(1, 0.1f);
         optionText.DOFade(1, 0.1f);
+    }
+
+    public void SpawnOption()
+    {
+        transform.localScale = Vector3.zero;
+
+        transform.DOScale(1, 0.25f).SetEase(Ease.OutBack);
     }
 
     public void Bounce()

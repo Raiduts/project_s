@@ -29,6 +29,8 @@ public class QuizScoringStudent : MonoBehaviour
     {
         scorePanel.SetActive(true);
         scoreText.text = $"{quizScore} poin";
+
+        UserData.Instance.AddScore(quizScore);
     }
 
     public int QuizScore()

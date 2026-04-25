@@ -50,7 +50,7 @@ public class JoinSessionStudent : MonoBehaviour
                 Debug.Log($"Berhasil join ke room: {inputCode}");
 
                 // 2. Simpan kode ke PlayerPrefs supaya scene Gameplay tahu harus ambil soal mana
-                PlayerPrefs.SetInt("IsTeacher", 0);
+                //PlayerPrefs.SetInt("IsTeacher", 0);
                 PlayerPrefs.SetString("Code", inputCode);
                 PlayerPrefs.Save();
 

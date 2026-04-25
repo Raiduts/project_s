@@ -138,6 +138,8 @@ MonoBehaviour:
   backgroundImage: {fileID: 4303184320453285737}
   settingPanel: {fileID: 5212414771486502681}
   backButton: {fileID: 6903314376126241662}
+  musicSlider: {fileID: 6971280617598074655}
+  sfxSlider: {fileID: 1324264612039415397}
 --- !u!1 &384861338021062076
 GameObject:
   m_ObjectHideFlags: 0

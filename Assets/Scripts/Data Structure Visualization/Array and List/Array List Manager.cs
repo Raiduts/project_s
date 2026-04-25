@@ -20,6 +20,11 @@ public class ArrayListManager : MonoBehaviour
 
     public void CreateNewLocomotive(Vector2Int index)
     {
+        //if (index.x == 0)
+        //{
+        //    return;
+        //}
+
         if (currentLocomotive)
         {
             ThrowOldLocomotive(currentLocomotive);  
@@ -39,15 +44,15 @@ public class ArrayListManager : MonoBehaviour
         });
     }
 
-    public void EditLocomotive(EditType addType)
+    public void EditLocomotive(EditType addType, int value = -1)
     {
         switch (addType)
         {
             case EditType.AddFirst:
-                currentLocomotive.AddFirst();
+                currentLocomotive.AddFirst(value);
                 break;
             case EditType.AddLast:
-                currentLocomotive.AddLast();
+                currentLocomotive.AddLast(value);
                 break;
             case EditType.RemoveFirst:
                 currentLocomotive.RemoveFirst();
@@ -56,6 +61,8 @@ public class ArrayListManager : MonoBehaviour
                 currentLocomotive.RemoveLast();
                 break;
         }
+
+        EventListener.Edited?.Invoke(currentLocomotive.GetIntArray());
     }
 }
 

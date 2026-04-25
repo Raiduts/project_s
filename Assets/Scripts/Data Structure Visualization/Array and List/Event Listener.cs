@@ -9,6 +9,7 @@ public static class EventListener
 
     // Segmented
     public static Action<Vector2Int> CreateArray; // Array and List
+    public static Action CreateList; // List
     public static Action<Vector2Int, int> AddValue; // Array and List
     public static Action<ArrayDimension> ChangeDimension; // Array
     public static Action<OperatorMode> ChangeMode; // Array and List
@@ -16,8 +17,10 @@ public static class EventListener
     // Many
     public static Action<int> AddFirst, AddLast; // Except Array
     public static Action RemoveFirst, RemoveLast; // Except Array
+    public static Action AccessData; // All
     public static Action DeleteArray, IsEmpty; // All
     public static Action<int> GetSize; // All
+    public static Action<int[,]> Edited; // All
 
     // Utilities
     public static Action<DashboardPage> ChangeDashboardPage;

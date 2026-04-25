@@ -6,45 +6,59 @@ using UnityEngine;
 
 public class QueueManager : MonoBehaviour
 {
-    [SerializeField]
-    private CardQueue cardQueuePref;
+    private Queue<FishQueue> cards = new Queue<FishQueue>();
 
-    private Queue<CardQueue> cards = new Queue<CardQueue>();
+    [SerializeField] private Transform queueContainer;
     
     public event Action<bool> isOperating;
 
-    private void Start()
+    public void AddCard(FishQueue newCard)
     {
-        
-    }
+        if (cards.Count >= 5)
+        {
+            CodePrinter.Instance.AddTextCode("Can't add more item (max 5)");
+            Destroy(newCard.gameObject);
+            return;
+        }
 
-    public void AddCard(CardQueue newCard)
-    {
+        CodePrinter.Instance.AddTextCode($"queue.Enqueue({newCard.GetName()})");
+
         StartCoroutine(operationCooldown());
 
         cards.Enqueue(newCard);
 
-        newCard.transform.position = Vector3.zero + new Vector3(cards.Count * 2.5f,0,0);
+        EventListener.Edited?.Invoke(GetIntData());
+
+        EventListener.AddFirst?.Invoke(newCard.id);
+
+        newCard.transform.parent = queueContainer;
+        newCard.transform.localPosition = Vector3.zero + new Vector3(cards.Count * 2, cards.Count * 1.25f,0);
     }
 
-    public CardQueue TakeCard()
+    public FishQueue TakeCard()
     {
         StartCoroutine(operationCooldown());
 
-        CardQueue temp = cards.Dequeue();
+        FishQueue temp = cards.Dequeue();
 
         temp.SlideOut();
 
         SyncPosition();
+
+        EventListener.Edited?.Invoke(GetIntData());
 
         return temp;
     }
 
     private void SyncPosition()
     {
-        foreach (CardQueue item in cards)
+        int i = 0;
+
+        foreach (FishQueue item in cards)
         {
-            item.transform.DOMoveX(item.transform.position.x - 2.5f, 1).SetDelay(0.5f);
+            i++;
+            item.transform.DOLocalMove(new Vector3(i * 2, i * 1.25f, 0), 1).SetDelay(0.5f);
+            //item.transform.DOMove(new Vector3(item.transform.position.x - 2, item.transform.position.y - 1.25f, 0), 1).SetDelay(0.5f);
         }
     }
 
@@ -60,5 +74,25 @@ public class QueueManager : MonoBehaviour
     public int GetQueueSize()
     {
         return cards.Count;
+    }
+
+    public FishQueue GetFirstFish()
+    {
+        return cards.Peek();
+    }
+
+    private int[,] GetIntData()
+    {
+        int[,] data = new int[cards.Count, 1];
+
+        int index = 0;
+
+        foreach (FishQueue item in cards)
+        {
+            data[index, 0] = item.id;
+            index++;
+        }
+
+        return data;
     }
 }

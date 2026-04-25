@@ -7,6 +7,7 @@ public class BurgerPart : MonoBehaviour
 {
     [SerializeField]
     private string partName;
+    public int id;
 
     [SerializeField]
     private float transformOffset;

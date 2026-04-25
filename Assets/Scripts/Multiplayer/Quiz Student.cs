@@ -31,8 +31,9 @@ public class QuizStudent : MonoBehaviour
     // 1. Ambil semua soal berdasarkan kode 
     public async void JoinAndFetchQuiz(string quizCode)
     {
-        QuerySnapshot snapshot = await db.Collection("Quizzes").Document(quizCode)
-                                        .Collection("Questions").GetSnapshotAsync();
+        QuerySnapshot snapshot = await 
+            db.Collection("Quizzes").Document(quizCode)
+            .Collection("Questions").GetSnapshotAsync();
 
         foreach (DocumentSnapshot doc in snapshot.Documents)
         {
@@ -43,9 +44,10 @@ public class QuizStudent : MonoBehaviour
 
         Debug.Log($"Berhasil ambil {localQuestions.Count} soal.");
 
-        // Test
+        // Start Quiz
         QuestionStudent.Instance.localQuestions = localQuestions;
-        QuestionStudent.Instance.ShowQuestion(localQuestions[0]);
+
+        QuizCountdown.Instance.StartCountdown();
     }
 
     public void ShuffleQuestions(List<QuestionData> list)
@@ -88,8 +90,8 @@ public class QuizStudent : MonoBehaviour
         Dictionary<string, object> data = new Dictionary<string, object> {
             { "name", userName },
             { "score", currentScore },
-            { "iconIndex", iconIndex },
-            { "lastUpdated", FieldValue.ServerTimestamp }
+            { "iconIndex", iconIndex }
+            //{ "lastUpdated", FieldValue.ServerTimestamp }
         };
 
         // SetAsync dengan Merge agar tidak menimpa data lain jika ada

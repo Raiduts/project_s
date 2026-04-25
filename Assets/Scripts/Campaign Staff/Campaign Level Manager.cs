@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine;
 public class CampaignLevelManager : MonoBehaviour
 {
     [Header("Object")]
+    [SerializeField] private TextMeshProUGUI chamberNameText;
     [SerializeField]
     private LevelButton levelButtonPref;
     private List<LevelButton> levelButtons;
@@ -35,7 +37,15 @@ public class CampaignLevelManager : MonoBehaviour
 
     private void Start()
     {
-        selectedCampaign = UserData.Instance.campaignDSType;
+        if (UserData.Instance)
+        {
+            selectedCampaign = UserData.Instance.campaignDSType;        
+        }
+        else
+        {
+            return;
+        }
+
 
         levelButtons = new List<LevelButton>();
 
@@ -60,6 +70,8 @@ public class CampaignLevelManager : MonoBehaviour
                 currentUnlockedLevel = UserData.Instance.queueLevel;
                 break;
         }
+
+        chamberNameText.text = $"Chamber of {sceneNames[(int) selectedCampaign]}";
 
         int pos = 200;
         int direction = 1;

@@ -23,15 +23,6 @@ public class Dudu : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        print("Dudu");
-
-        if (AuthManager.Instance && AuthManager.Instance.User() != null) 
-            ShowDudu($"Hello {AuthManager.Instance.User().DisplayName}!");
-        else ShowDudu("Hello user!");
-    }
-
     public void ShowDudu(string duduSpeech)
     {
         print("Showing dudu");
@@ -75,11 +66,13 @@ public class Dudu : MonoBehaviour
 
         duduImage.transform.DOMoveY(-1000, 0.5f).SetDelay(0.5f).OnComplete(() =>
         {
-            background.DOFade(0, 0.5f);
-            background.gameObject.SetActive(false);
-            duduImage.gameObject.SetActive(false);
-            duduImage.transform.position = new(duduImage.transform.position.x, 232, 0);
-            duduText.text = "";
+            background.DOFade(0, 0.5f).OnComplete(() =>
+            { 
+                background.gameObject.SetActive(false);
+                duduImage.gameObject.SetActive(false);
+                duduImage.transform.position = new(duduImage.transform.position.x, 232, 0);
+                duduText.text = "";
+            });
         });
     }
 }

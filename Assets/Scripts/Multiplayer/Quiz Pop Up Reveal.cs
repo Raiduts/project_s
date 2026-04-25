@@ -40,13 +40,13 @@ public class QuizPopUpReveal : MonoBehaviour
 
     public void ShowPopUp()
     {
-        rectTransform.DOAnchorPosY(-76, 0.25f).SetEase(Ease.OutBack);
+        rectTransform.DOAnchorPosY(-76, 0.25f);
 
         Invoke(nameof(HidePopUp), duration);
     }
 
     public void HidePopUp()
     {
-        rectTransform.DOAnchorPosY(76, 0.25f).SetEase(Ease.OutBack);
+        rectTransform.DOAnchorPosY(76, 0.25f);
     }
 }

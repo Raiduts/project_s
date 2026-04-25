@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Locomotive : MonoBehaviour
@@ -9,11 +10,10 @@ public class Locomotive : MonoBehaviour
     [SerializeField] private int y;
     [SerializeField] private int gapX;
     [SerializeField] private int gapY;
-    private Container[,] array;
+    public Container[,] array;
 
     [Header("Assets")]
     [SerializeField] private GameObject headPref;
-    [SerializeField] private GameObject trolley;
     [SerializeField] private Container containerPref;
 
     private void Start()
@@ -71,9 +71,27 @@ public class Locomotive : MonoBehaviour
             return;
         }
 
-        array[(int) xy.x, (int) xy.y].SetValue(value);
+        array[xy.x, xy.y].SetValue(value);
+        array[xy.x, xy.y].DoPopAnimation();
+
+        EventListener.Edited?.Invoke(GetIntArray());
 
         // ArrayListEventListener.AddValue?.Invoke(new(x, y), value);
+    }
+
+    public int[,] GetIntArray()
+    {
+        int[,] arrayInt = new int[x, y];
+
+        for (int horiz = 0; horiz < x; horiz++)
+        {
+            for (int verti = 0; verti < y; verti++)
+            {
+                arrayInt[horiz,verti] = array[horiz, verti].value;
+            }
+        }
+
+        return arrayInt;
     }
 
     private Container[] IncreaseLength()
@@ -119,9 +137,12 @@ public class Locomotive : MonoBehaviour
         return values;
     }
 
-    public void AddFirst()
+    public void AddFirst(int value)
     {
         Container[] prefArray = IncreaseLength();
+
+        array[0, 0].DoPopAnimation();
+        array[0, 0].SetValue(value);
 
         for (int i = 0; i < x - 1; i++)
         {
@@ -129,9 +150,12 @@ public class Locomotive : MonoBehaviour
         }
     }
 
-    public void AddLast()
+    public void AddLast(int value)
     {
         Container[] prefArray = IncreaseLength();
+
+        array[array.Length - 1, 0].DoPopAnimation();
+        array[array.Length - 1, 0].SetValue(value);
 
         for (int i = 0; i < x - 1; i++)
         {
@@ -166,8 +190,20 @@ public class Locomotive : MonoBehaviour
         }
     }
 
+    public int GetLength()
+    {
+        return x;
+    }
+
+    public int GetHeight()
+    {
+        return y;
+    }
+
     private void OnDestroy()
     {
         EventListener.AddValue -= SetContainerValue;
+
+        transform.DOKill();
     }
 }

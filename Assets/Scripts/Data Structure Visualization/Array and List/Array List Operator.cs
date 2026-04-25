@@ -1,17 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Security;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ArrayListOperator : MonoBehaviour
 {
     public static ArrayListOperator instance;
 
-    private CodePrinter printer;
+    public DSType OperatorType;
 
     [Header("Create")]
     [SerializeField] private GameObject createSection;
@@ -28,7 +25,10 @@ public class ArrayListOperator : MonoBehaviour
 
     private bool is2D = true, isOpen = true, isOnAction, isCreating = true;
 
-    int x, y, value;
+    public Locomotive GetLocomotive()
+    {
+        return ArrayListManager.Instance.currentLocomotive;
+    }
 
     public void SetArrayDimension(bool is2DNow)
     {
@@ -41,12 +41,18 @@ public class ArrayListOperator : MonoBehaviour
     {
         instance = this;
 
-        createButton.onClick.AddListener(CreateArray);
+        if (OperatorType == DSType.Array)
+        {
+            createButton.onClick.AddListener(CreateArray);
+        }
+        else
+        {
+            createButton.onClick.AddListener(CreateList);
+        }
+
         setValueButton.onClick.AddListener(SetValue);
 
         SetArrayDimension(false);
-
-        printer = CodePrinter.Instance;
     }
 
     public void CreateArray()
@@ -54,43 +60,169 @@ public class ArrayListOperator : MonoBehaviour
         int x = int.Parse(xLength.text);
         int y = int.Parse(yLength.text);
 
-        //x = x == 0 ? 1 : x;
+        x = x == 0 ? 1 : x;
         y = y == 0 || !is2D ? 1 : y;
 
         EventListener.CreateArray(new(x, y));
 
         // ArrayListManager.Instance.CreateNewLocomotive(x, y);
 
-        printer.AddTextCode($"array.Clear()");
+        CodePrinter.Instance.AddTextCode($"array.Clear()");
 
         if (is2D)
         {
-            printer.AddTextCode($"array = new[{x},{y}]");
+            CodePrinter.Instance.AddTextCode($"array = new[{x},{y}]");
         }
         else
         {
-            printer.AddTextCode($"array = new[{x}]");
+            CodePrinter.Instance.AddTextCode($"array = new[{x}]");
         }
+    }
+
+    public void AccessByIndex()
+    {
+        int x = int.Parse(xIndex.text);
+        int y = int.Parse(yIndex.text);
+
+        y = !is2D ? 0 : y;
+
+        int value;
+
+        try
+        {
+            value = GetLocomotive().array[x, y].value;
+        }
+        catch
+        {
+            ErrorPopper.Instance.ShowError("index tidak dapat diakses");
+            return;
+        }
+
+        if (is2D)
+        {
+            CodePrinter.Instance.AddTextCode($"print(array[{x},{y}])");
+        }
+        else
+        {
+            CodePrinter.Instance.AddTextCode($"print(array[{x}])");
+        }
+
+        CodePrinter.Instance.AddTextReturn($"return: {value}");
+    }
+
+    public void GetSize()
+    {
+        int length = 0;
+
+        try
+        {
+            length = GetLocomotive().array.Length;
+        }
+        catch
+        {
+            ErrorPopper.Instance.ShowError("Kereta belum dibuat!");
+            return;
+        }
+
+        if (OperatorType == DSType.Array)
+        {
+            CodePrinter.Instance.AddTextCode($"print(array.Length)");
+        }
+        else
+        {
+            CodePrinter.Instance.AddTextCode($"print(linkedlist.Size())");
+        }
+
+        EventListener.GetSize?.Invoke(length);
+
+        CodePrinter.Instance.AddTextReturn($"return: {length}");
+    }
+
+    public void IsEmpty()
+    {
+        bool isEmpty = false;
+
+        EventListener.IsEmpty();
+
+        try
+        {
+            isEmpty = GetLocomotive().array.Length == 0;
+        }
+        catch
+        {
+            isEmpty = true;
+            //ErrorPopper.Instance.ShowError("Kereta belum dibuat!");
+            //return;
+        }
+
+        if (OperatorType == DSType.Array)
+        {
+            CodePrinter.Instance.AddTextCode("print(array.IsEmpty())");
+        }
+        else
+        {
+            CodePrinter.Instance.AddTextCode("print(linkedlist.IsEmpty())");
+        }
+
+        CodePrinter.Instance.AddTextReturn($"return: {isEmpty}");
+    }
+
+    public void CreateList()
+    {
+        EventListener.CreateArray(new(0, 1));
+
+        // ArrayListManager.Instance.CreateNewLocomotive(x, y);
+
+        CodePrinter.Instance.AddTextCode($"linkedlist.Clear()");
+
+        CodePrinter.Instance.AddTextCode($"linkedlist = new linkedlist<int>");
     }
 
     public void SetValue()
     {
         Vector2Int xy = new(int.Parse(xIndex.text), int.Parse(yIndex.text));
+        
+        if (!GetLocomotive())
+        {
+            ErrorPopper.Instance.ShowError("Kereta belum dibuat!");
+            return;
+        }
+        else if (xy.x >= GetLocomotive().GetLength() || xy.y >= GetLocomotive().GetHeight())
+        {
+            ErrorPopper.Instance.ShowError("Indeks tidak dapat diakses");
+            return;
+        }
 
         if (!is2D)
         {
             xy.y = 0;
         }
 
-        int value = int.Parse(valueInput.text);
+        int value = 0;
+
+        try
+        {
+            value = int.Parse(valueInput.text);
+        }
+        catch
+        {
+            value = 0;
+        }
 
         if (is2D)
         {
-            printer.AddTextCode($"array[{xy.x},{xy.y}] = {valueInput.text}");
+            CodePrinter.Instance.AddTextCode($"array[{xy.x},{xy.y}] = {valueInput.text}");
         }
         else
         {
-            printer.AddTextCode($"array[{xy.x}] = {valueInput.text}");
+            if (OperatorType == DSType.Array)
+            {
+                CodePrinter.Instance.AddTextCode($"array[{xy.x}] = {valueInput.text}");
+            }
+            else
+            {
+                CodePrinter.Instance.AddTextCode($"traversing...");
+            }
         }
 
         EventListener.AddValue(xy, value);
@@ -126,40 +258,71 @@ public class ArrayListOperator : MonoBehaviour
         }
     }
 
-    public void AddFirst()
+    public void TraverseInput()
     {
         ArrayListManager.Instance.EditLocomotive(EditType.AddFirst);
 
-        EventListener.AddFirst?.Invoke(0);
+        CodePrinter.Instance.AddTextCode("transversal...");
+    }
 
-        printer.AddTextCode("linkedlist.AddFirst()");
+    public void AddFirst()
+    {
+        if (GetLocomotive() == null || GetLocomotive().array.Length >= 5)
+        {
+            return;
+        }
+
+        int value = int.Parse(valueInput.text);
+
+        ArrayListManager.Instance.EditLocomotive(EditType.AddFirst, value);
+
+        EventListener.AddFirst?.Invoke(value);
+
+        CodePrinter.Instance.AddTextCode($"linkedlist.AddFirst({value})");
     }
 
     public void AddLast()
     {
-        ArrayListManager.Instance.EditLocomotive(EditType.AddLast);
+        if (GetLocomotive() == null || GetLocomotive().array.Length >= 5)
+        {
+            return;
+        }
 
-        EventListener.AddLast?.Invoke(0);
+        int value = int.Parse(valueInput.text);
 
-        printer.AddTextCode("linkedlist.AddLast()");
+        ArrayListManager.Instance.EditLocomotive(EditType.AddLast, value);
+
+        EventListener.AddLast?.Invoke(value);
+
+        CodePrinter.Instance.AddTextCode($"linkedlist.AddLast({value})");
     }
 
     public void RemoveFirst()
     {
+        if (GetLocomotive() == null || GetLocomotive().array.Length <= 0)
+        {
+            return;
+        }
+
         ArrayListManager.Instance.EditLocomotive(EditType.RemoveFirst);
 
         EventListener.RemoveFirst?.Invoke();
 
-        printer.AddTextCode("linkedlist.RemoveFirst()");
+        CodePrinter.Instance.AddTextCode("linkedlist.RemoveFirst()");
     }
 
     public void RemoveLast()
     {
+        if (GetLocomotive() == null || GetLocomotive().array.Length <= 0)
+        {
+            return;
+        }
+
         ArrayListManager.Instance.EditLocomotive(EditType.RemoveLast);
 
         EventListener.RemoveLast?.Invoke();
 
-        printer.AddTextCode("linkedlist.RemoveLast()");
+        CodePrinter.Instance.AddTextCode("linkedlist.RemoveLast()");
     }
 
     private IEnumerator ChangeModeWhileOpen()

@@ -100,7 +100,7 @@ public class AuthManager : MonoBehaviour
             return;
         }
 
-        ui.usernameText.gameObject.SetActive(signedIn);
+        //ui.usernameText.gameObject.SetActive(signedIn);
 
         if (signedIn)
         {
@@ -127,11 +127,12 @@ public class AuthManager : MonoBehaviour
 
         if (task.Exception != null)
         {
-            Debug.LogError($"Login Failed : {task.Exception}");
+            ErrorPopper.Instance.ShowError("Gagal melakukan Login!");
         }
         else
         {
             Debug.Log("Login Success");
+
         }
     }
 
@@ -151,7 +152,8 @@ public class AuthManager : MonoBehaviour
 
         if (task.Exception != null)
         {
-            Debug.LogError("Register Failed");
+            ErrorPopper.Instance.ShowError("Gagal Melakukan Registrasi!");
+            //Debug.LogError("Register Failed");
             yield break;
         }
 
@@ -170,6 +172,9 @@ public class AuthManager : MonoBehaviour
         else
         {
             Debug.Log($"Register Success: {name}");
+
+            //MySceneManager.instance.ChangeScene("Dashboard");
+            //Login(email, password);
         }
     }
 
@@ -186,8 +191,8 @@ public class AuthManager : MonoBehaviour
 
         if (ui != null)
         {
-            ui.usernameText.text = "";
-            ui.usernameText.gameObject.SetActive(false);
+            //ui.usernameText.text = "";
+            //ui.usernameText.gameObject.SetActive(false);
             ui.OpenAuth();
         }
 

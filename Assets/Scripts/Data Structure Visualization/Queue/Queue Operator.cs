@@ -5,12 +5,21 @@ using UnityEngine;
 
 public class QueueOperator : MonoBehaviour
 {
+    public static QueueOperator Instance;
+
     [SerializeField]
-    private List<CardQueue> cards;
+    private List<FishQueue> cards;
+
+    private int selectedIndex = -1;
 
     private QueueManager queueManager;
 
     private bool isOperating;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -24,30 +33,50 @@ public class QueueOperator : MonoBehaviour
         this.isOperating = isOperating;
     }
 
-    public void AddByIndex(int index)
+    public void SelectByIndex(int index)    
     {
-        if (isOperating) return;
-
-        CardQueue temp = Instantiate(cards[index]);
-
-        queueManager.AddCard(temp);
-
-        EventListener.AddFirst?.Invoke(0);
-
-        CodePrinter.Instance.AddTextCode($"queue.Enqueue({temp.GetNumber()})");
+        selectedIndex = index;
     }
 
-    public void TakeCard()
+    public void BypassEnqueue(int id)
+    {
+        FishQueue temp = Instantiate(cards[id]);
+        queueManager.AddCard(temp);
+    }
+
+    public void Enqueue()
+    {
+        if (isOperating || selectedIndex == -1) return;
+
+        FishQueue temp = Instantiate(cards[selectedIndex]);
+
+        queueManager.AddCard(temp);
+    }
+
+    public void Dequeue()
     {
         if (isOperating) return;
 
-        CardQueue temp = queueManager.TakeCard();
+        FishQueue temp = queueManager.TakeCard();
 
         EventListener.RemoveFirst?.Invoke();
 
         CodePrinter.Instance.AddTextCode($"queue.Dequeue()");
 
-        CodePrinter.Instance.AddTextCode($"return : {temp.GetNumber()}");
+        CodePrinter.Instance.AddTextCode($"return : {temp.GetName()}");
+    }
+
+    public void Peek()
+    {
+        if (isOperating) return;
+
+        FishQueue temp = queueManager.GetFirstFish();
+
+        EventListener.AccessData?.Invoke();
+
+        CodePrinter.Instance.AddTextCode($"queue.Peek()");
+
+        CodePrinter.Instance.AddTextCode($"return : {temp.GetName()}");
     }
 
     public void IsEmpty()
@@ -61,7 +90,7 @@ public class QueueOperator : MonoBehaviour
         CodePrinter.Instance.AddTextCode($"return : {isEmpty}");
     }
 
-    public void GetSize()
+    public void Size()
     {
         if (isOperating) return;
 

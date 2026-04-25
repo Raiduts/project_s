@@ -6,17 +6,13 @@ public class QuestOnAddLast : QuestBase
 {
     [Header("Quest Req")]
     [SerializeField]
-    private Vector2Int reqVector;
-    [SerializeField]
-    private int requiredNumber = 25;
+    private int requiredNumber;
 
-    public override void OnAddLast(int obj)
+    public override void OnAddLast(int req)
     {
-        if (QuestManager.instance.CheckQuest(this))
+        if (req == requiredNumber && QuestManager.instance.CheckQuest(this))
         {
-            Dudu.Instance.ShowDudu(duduComment);
-
-            QuestEvent.CompletedQuest?.Invoke();
+            QuestCompleted();
         }
     }
 }

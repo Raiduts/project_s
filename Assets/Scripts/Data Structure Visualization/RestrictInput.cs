@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,13 +17,22 @@ public class RestrictInput : MonoBehaviour
     private void Start()
     {
         inputField = GetComponent<TMP_InputField>();
+
+        inputField.onEndEdit.AddListener(OnChangeInput);
     }
 
-    public void OnChangeInput()
+    private void OnChangeInput(string textInput)
     {
-        print("Changed");
+        int input = 0;
 
-        int input = int.Parse(inputField.text);
+        try
+        {
+            input = int.Parse(textInput);
+        }
+        catch 
+        {
+
+        }
 
         if (isPositive && input < 0)
         {

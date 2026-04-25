@@ -34,22 +34,28 @@ public class QuestManager : MonoBehaviour
     {
         quests = new Queue<QuestBase>();
 
+        questLevel = FindAnyObjectByType<LevelData>();
+
+        if (questLevel == null)
+        {
+
+            return;
+        }
+
+        if (AuthManager.Instance && AuthManager.Instance.User() != null)
+            Dudu.Instance.ShowDudu($"Haloo {AuthManager.Instance.User().DisplayName}, {questLevel.duduText}. Les's Go!!");
+        else Dudu.Instance.ShowDudu("Haloo user!");
+
         Invoke(nameof(CheckForQuest), 5f);
-        //CheckForQuest();
 
         QuestEvent.CompletedQuest += OnCompleteQuest;
     }
 
     private void CheckForQuest()
     {
-        questLevel = FindAnyObjectByType<LevelData>();
 
         //print(questLevel.name);
 
-        if (questLevel == null)
-        {
-            return;
-        }
 
         foreach (QuestBase quest in questLevel.GetQuest())
         {
@@ -89,29 +95,55 @@ public class QuestManager : MonoBehaviour
         switch (campaignDSType)
         {
             case DSType.Array:
-                UserData.Instance.arrayLevel = newLevel;
+                if (newLevel == 4)
+                {
+                    UserData.Instance.completedArray = true;
+                }
+                if (newLevel > UserData.Instance.arrayLevel)
+                {
+                    UserData.Instance.arrayLevel = newLevel;                
+                    UserData.Instance.AddScore(500);
+                }
                 break;
             case DSType.Linkedlist:
-                UserData.Instance.linkedlistLevel = newLevel;
+                if (newLevel == 3)
+                {
+                    UserData.Instance.completedLinkedlist = true;
+                }
+                if (newLevel > UserData.Instance.linkedlistLevel)
+                {
+                    UserData.Instance.linkedlistLevel = newLevel;
+                    UserData.Instance.AddScore(500);
+                }
                 break;
             case DSType.Stack:
-                UserData.Instance.stackLevel = newLevel;
+                if (newLevel == 3)
+                {
+                    UserData.Instance.completedStack = true;
+                }
+                if (newLevel > UserData.Instance.stackLevel)
+                {
+                    UserData.Instance.stackLevel = newLevel;
+                    UserData.Instance.AddScore(500);
+                }
                 break;
             case DSType.Queue:
-                UserData.Instance.queueLevel = newLevel;
+                if (newLevel == 3)
+                {
+                    UserData.Instance.completedQueue = true;
+                }
+                if (newLevel > UserData.Instance.queueLevel)
+                {
+                    UserData.Instance.queueLevel = newLevel;
+                    UserData.Instance.AddScore(500);
+                }
                 break;
         }
-
-        UserData.Instance.SaveProgress();
-
-        print("LEVEL COMPLETED");
     }
 
     public void StartNewQuest()
     {
         currentQuest = quests.Dequeue();
-
-        currentQuest.TryShowTips();
 
         questInfo.ShowQuestInfo(currentQuest);
         

@@ -15,9 +15,7 @@ public class QuestOnAddValue : QuestBase
     {
         if (vector == reqVector && value == requiredNumber && QuestManager.instance.CheckQuest(this))
         {
-            Dudu.Instance.ShowDudu(duduComment);
-
-            QuestEvent.CompletedQuest?.Invoke();
+            QuestCompleted();
         }
     }
 }

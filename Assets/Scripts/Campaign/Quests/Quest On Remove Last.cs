@@ -8,8 +8,7 @@ public class QuestOnRemoveLast : QuestBase
     {
         if (QuestManager.instance.CheckQuest(this))
         {
-            Dudu.Instance.ShowDudu(duduComment);
-            QuestEvent.CompletedQuest?.Invoke();
+            QuestCompleted();
         }
     }
 }

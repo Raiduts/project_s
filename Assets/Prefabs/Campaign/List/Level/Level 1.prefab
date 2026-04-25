@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4afb0a86418331547a178c0435929bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   questsSerialized:
-  - {fileID: -4492315217759277245, guid: 70a49a6b3df160a4ca35b8592f4c69f3, type: 3}
+  - {fileID: 8030240551232012243, guid: 70a49a6b3df160a4ca35b8592f4c69f3, type: 3}
+  - {fileID: -4492315217759277245, guid: 3084f5c4990d27f45b900926fbda1370, type: 3}
+  - {fileID: 7899762744492948434, guid: 39de907a403906d43b39f961f03292cd, type: 3}
+  duduText: 

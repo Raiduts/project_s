@@ -1,4 +1,5 @@
 using Firebase.Auth;
+using Firebase.Extensions;
 using Firebase.Firestore;
 using UnityEngine;
 
@@ -59,18 +60,50 @@ public class QuizSceneManager : MonoBehaviour
     void OnGameStarted()
     {
         Debug.Log("Game mulai!");
-        
-        // Cara 1
-        int isTeacher = PlayerPrefs.GetInt("IsTeacher", 0);
 
-        if (isTeacher == 1)
+        DocumentReference roomRef = db.Collection("Quizzes").Document(roomCode);
+
+        roomRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
-            ActivateTeacherMode();
-        }
-        else
-        {
-            ActivateStudentMode();
-        }
+            if (task.IsCompleted)
+            {
+                DocumentSnapshot snapshot = task.Result;
+
+                if (snapshot.Exists)
+                {
+                    string createdBy = snapshot.GetValue<string>("createdBy");
+
+                    print(createdBy);
+
+                    if (createdBy == auth.CurrentUser.Email)
+                    {
+                        print("sama");
+                        ActivateTeacherMode();
+                    }
+                    else
+                    {
+                        ActivateStudentMode();
+                    }
+                }
+                else
+                {
+                    Debug.Log("Document not found!");
+                }
+            }
+        });
+
+        // Cara 1
+        //int isTeacher = PlayerPrefs.GetInt("IsTeacher", 0);
+
+        //if (isTeacher == 1)
+        //{
+        //    ActivateTeacherMode();
+        //}
+        //else
+        //{
+        //    ActivateStudentMode();
+        //}
+
         // contoh:
         // SceneManager.LoadScene("GameScene");
     }
@@ -82,6 +115,7 @@ public class QuizSceneManager : MonoBehaviour
         // contoh:
         // SceneManager.LoadScene("ResultScene");
     }
+
     void ActivateTeacherMode()
     {
         Debug.Log("Masuk sebagai Guru");

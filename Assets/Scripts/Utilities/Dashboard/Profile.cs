@@ -30,7 +30,7 @@ public class Profile : MonoBehaviour
 
         // Posisi awal (off screen bawah)
         shownPos = profilePanel.anchoredPosition;
-        hiddenPos = shownPos + new Vector2(0, -1000f);
+        hiddenPos = shownPos + new Vector2(0, 1000f);
 
         profilePanel.anchoredPosition = hiddenPos;
         backgroundImage.color = new Color(0, 0, 0, 0);
