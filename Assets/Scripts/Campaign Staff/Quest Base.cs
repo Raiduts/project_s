@@ -17,6 +17,8 @@ public abstract class QuestBase : MonoBehaviour
     [Header("Tips")]
     [SerializeField] private Tips tips;
 
+    private bool isCompleted;
+
     void Start()
     {
         EventListener.CreateArray += OnCreate;
@@ -79,6 +81,13 @@ public abstract class QuestBase : MonoBehaviour
 
     public void QuestCompleted()
     {
+        if (isCompleted)
+        {
+            return;
+        }
+
+        isCompleted = true;
+
         Dudu.Instance.ShowDudu(duduComment);
 
         QuestEvent.CompletedQuest?.Invoke();

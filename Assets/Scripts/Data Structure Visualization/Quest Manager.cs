@@ -72,6 +72,7 @@ public class QuestManager : MonoBehaviour
     public void OnCompleteQuest()
     {
         questInfo.HideQuestInfo();
+
         print(quests.Count);
 
         if (quests.Count > 0)

@@ -18,25 +18,33 @@ public class QuestInfo : MonoBehaviour
     {
         rect = GetComponent<RectTransform>();
 
-        showPosition = rect.anchoredPosition.x;
-        hidePosition = showPosition - 600;
+        // X
+        //showPosition = rect.anchoredPosition.x;
+        //hidePosition = showPosition - 600;
 
-        rect.anchoredPosition = new Vector2(hidePosition, rect.anchoredPosition.y);
+        // Y
+        showPosition = rect.anchoredPosition.y;
+        hidePosition = -showPosition;
+
+        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, hidePosition);
     }
 
     public void ShowQuestInfo(QuestBase currentQuest)
     {
-        rect.DOAnchorPosX(showPosition, 0.5f);
-
         questTitle.text = currentQuest.questTitle;
         questObjective.text = currentQuest.questObjective;
+
+        //rect.DOAnchorPosX(showPosition, 0.5f);
+        rect.DOAnchorPosY(showPosition, 0.5f);
     }
 
     public void HideQuestInfo()
     {
-        rect.DOAnchorPosX(hidePosition, 0.5f);
-
-        questTitle.text = "";
-        questObjective.text = "";
+        //rect.DOAnchorPosX(hidePosition, 0.5f);
+        rect.DOAnchorPosY(hidePosition, 0.5f).OnComplete(() =>
+        {
+            questTitle.text = "";
+            questObjective.text = "";
+        });
     }
 }
