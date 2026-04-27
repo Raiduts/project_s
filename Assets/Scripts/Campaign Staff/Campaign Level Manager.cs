@@ -71,7 +71,7 @@ public class CampaignLevelManager : MonoBehaviour
                 break;
         }
 
-        chamberNameText.text = $"Chamber of {sceneNames[(int) selectedCampaign]}";
+        chamberNameText.text = $"School of {sceneNames[(int) selectedCampaign]}";
 
         int pos = 200;
         int direction = 1;

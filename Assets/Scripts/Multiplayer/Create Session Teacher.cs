@@ -57,7 +57,7 @@ public class CreateSessionTeacher : MonoBehaviour
         }
 
         generatedCode = newCode;
-        codeText.text = generatedCode;
+        codeText.text = $"Kode Ruang: {generatedCode}";
         buatRoomButton.interactable = true;
     }
 

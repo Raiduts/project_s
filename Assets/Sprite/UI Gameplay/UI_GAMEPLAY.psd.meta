@@ -332,6 +332,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_GAMEPLAY_10
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 415
+        width: 518
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 254999adb6a8692468eede344c198aba
+      internalID: -1476579701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -345,6 +366,7 @@ TextureImporter:
     nameFileIdTable:
       UI_GAMEPLAY_0: -523397838
       UI_GAMEPLAY_1: -1417481164
+      UI_GAMEPLAY_10: -1476579701
       UI_GAMEPLAY_2: 920494287
       UI_GAMEPLAY_3: 1008391341
       UI_GAMEPLAY_4: -146468525

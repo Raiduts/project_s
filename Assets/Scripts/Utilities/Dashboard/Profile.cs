@@ -33,7 +33,7 @@ public class Profile : MonoBehaviour
         hiddenPos = shownPos + new Vector2(0, 1000f);
 
         profilePanel.anchoredPosition = hiddenPos;
-        backgroundImage.color = new Color(0, 0, 0, 0);
+        backgroundImage.color = new Color(0.8862746f, 0.8941177f, 0.7960785f, 0);
         closeButton.DOAnchorPosY(128, 0.3f);
 
         EventListener.ChangeDashboardPage += OnChangeDashboardPage;

@@ -142,7 +142,7 @@ public class ArrayListOperator : MonoBehaviour
     {
         bool isEmpty = false;
 
-        EventListener.IsEmpty();
+        EventListener.IsEmpty?.Invoke();
 
         try
         {

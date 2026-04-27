@@ -26,7 +26,7 @@ public class FreemodeSection : MonoBehaviour
 
         // Background fade (lebih smooth masuk)
         seq.Join(
-            backgroundImage.DOFade(0.75f, 0.4f)
+            backgroundImage.DOFade(0.97f, 0.4f)
             .From(0)
             .SetEase(Ease.OutQuad)
         );

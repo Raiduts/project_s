@@ -18,15 +18,15 @@ public class ErrorPopUp : MonoBehaviour
 
     private void Show()
     {
-        transform.DOScale(1.15f, 0.25f).SetEase(Ease.OutBack).OnComplete(() =>
+        transform.DOScaleY(1.15f, 0.25f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            transform.DOScale(1, 0.25f).SetEase(Ease.OutBack);
+            transform.DOScaleY(1, 0.25f).SetEase(Ease.OutBack);
         });
     }
 
     public void Hide()
     {
-        transform.DOScale(0, 0.25f).SetEase(Ease.InBack).OnComplete(() => 
+        transform.DOScaleY(0, 0.25f).SetEase(Ease.InBack).OnComplete(() => 
         {
             CloseError?.Invoke();
             Destroy(gameObject);

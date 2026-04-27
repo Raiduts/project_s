@@ -13,6 +13,8 @@ public class LevelButton : MonoBehaviour
     private Button button;
     [SerializeField]
     private TextMeshProUGUI textNumber;
+    [SerializeField]
+    private Image Locked;
 
     public Action<int> OnSelectLevel;
 
@@ -30,6 +32,8 @@ public class LevelButton : MonoBehaviour
     public void SetInteractable(bool isInteractable)
     {
         button.interactable = isInteractable;
+        Locked.gameObject.SetActive(!isInteractable);
+
     }
 
     public int GetLevel() 
