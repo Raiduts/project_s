@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 50, y: 1, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3038862743062983463}
@@ -51,7 +51,6 @@ MonoBehaviour:
   gapX: 25
   gapY: 15
   headPref: {fileID: 5694395022662613359, guid: 0f28a2da9e76b8747a3f07a35a04e24f, type: 3}
-  trolley: {fileID: 1792476956978397722, guid: 3c511e46c9d7b7e418be2ecddd055a59, type: 3}
   containerPref: {fileID: 6519031577566125634, guid: 7983b069498c46242a47741ea5659e19, type: 3}
 --- !u!114 &400003692409816924
 MonoBehaviour:

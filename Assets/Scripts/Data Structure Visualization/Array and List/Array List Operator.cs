@@ -206,6 +206,7 @@ public class ArrayListOperator : MonoBehaviour
         }
         catch
         {
+            valueInput.text = "0";
             value = 0;
         }
 

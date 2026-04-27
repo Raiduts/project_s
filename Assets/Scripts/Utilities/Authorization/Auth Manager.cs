@@ -173,6 +173,7 @@ public class AuthManager : MonoBehaviour
         {
             Debug.Log($"Register Success: {name}");
 
+            UserData.Instance.LoadProgress();
             //MySceneManager.instance.ChangeScene("Dashboard");
             //Login(email, password);
         }

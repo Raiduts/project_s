@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questTitle: Mengisi Stack
-  questObjective: Masukkan </b>Ikan Bass Hijau<b> ke antrian
-  duduComment: 
+  questObjective: Masukkan </b>Ikan Kerap<b> ke antrian
+  duduComment: Kerja Bagus!
   tips: {fileID: 0}
   requiredNumber: 0

@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questTitle: Mengolah Stack
-  questObjective: 'Buat menjadi
+  questObjective: 'Buat menjadi stack (Atas ke Bawah)
 
-    Jagung-Labu-Ubi-Jagung-Labu-Ubi'
+    Javu-Opion-Laboo-Javu-Opion-Labo'
   duduComment: 
   tips: {fileID: 0}
   indexY:

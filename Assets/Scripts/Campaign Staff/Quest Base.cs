@@ -88,7 +88,14 @@ public abstract class QuestBase : MonoBehaviour
 
         isCompleted = true;
 
-        Dudu.Instance.ShowDudu(duduComment);
+        if (duduComment != "")
+        {
+            Dudu.Instance.ShowDudu(duduComment);        
+        }
+        else
+        {
+            Dudu.Instance.ShowDudu("Kerja Bagus!");
+        }
 
         QuestEvent.CompletedQuest?.Invoke();
     }

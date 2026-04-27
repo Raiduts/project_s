@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questTitle: Melihat Queue
   questObjective: Cek antrian paling depan
-  duduComment: 
+  duduComment: Kerja Bagus!
   tips: {fileID: 0}
 --- !u!114 &-7161519664449144764
 MonoBehaviour:

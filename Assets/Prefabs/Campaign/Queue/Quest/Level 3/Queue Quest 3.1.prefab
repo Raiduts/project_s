@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questTitle: Mengolah Queue
-  questObjective: '"Buat menjadi
+  questObjective: 'Buat menjadi (Depan ke Belakang)
 
-    Bass-Bass-Tuna-Salmon-Salmon"'
+    Kerap-Kerap-Tunne-Bash-Bash'
   duduComment: 
   tips: {fileID: 0}
   indexY:

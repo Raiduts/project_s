@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questTitle: Mengisi Stack
-  questObjective: Masukkan </b>Box Jagung<b> ke tumpukan
+  questObjective: Masukkan </b>Box Javu<b> ke tumpukan
   duduComment: 
   tips: {fileID: 0}
   requiredNumber: 0

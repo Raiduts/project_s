@@ -38,9 +38,17 @@ public class Navigate : MonoBehaviour
 
     public void BackHome()
     {
-        WarningPopper.Instance.ShowWarning("Yakin ingin kembali?", () => 
-        { 
+        WarningPopper.Instance.ShowWarning("Yakin ingin kembali?", () =>
+        {
             MySceneManager.instance.ChangeScene("Dashboard");
+        });
+    }
+
+    public void ExitGame()
+    {
+        WarningPopper.Instance.ShowWarning("Kamu yakin ingin keluar?", () =>
+        {
+            Application.Quit();
         });
     }
 
