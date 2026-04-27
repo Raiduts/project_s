@@ -30,8 +30,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        musicVolume = PlayerPrefs.GetFloat("music");
-        sfxVolume = PlayerPrefs.GetFloat("sfx");
+        musicVolume = PlayerPrefs.GetFloat("music", 1);
+        sfxVolume = PlayerPrefs.GetFloat("sfx", 1);
 
         SetMusicVolume(musicVolume);
         SetSfxVolume(sfxVolume);
