@@ -11,6 +11,7 @@ public class QuizPopUpReveal : MonoBehaviour
     private TextMeshProUGUI mainText, scoreText;
     [SerializeField]
     private float duration;
+    [SerializeField] private Color correct, incorrect;
 
     private RectTransform rectTransform;
     private Image popUpBackground;
@@ -27,12 +28,12 @@ public class QuizPopUpReveal : MonoBehaviour
 
         if (score == 0)
         {
-            popUpBackground.color = Color.red;
+            popUpBackground.color = incorrect;
             scoreText.gameObject.SetActive(false);
         }
         else
         {
-            popUpBackground.color = Color.green;
+            popUpBackground.color = correct;
             scoreText.gameObject.SetActive(true);
             scoreText.text = $"+{score}";   
         }
