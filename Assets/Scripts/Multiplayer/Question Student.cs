@@ -20,6 +20,7 @@ public class QuestionStudent : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
 
     [Header("Score")]
+    private int correctAnswer, wrongAnswer;
 
     [Header("Question")]
     [SerializeField] private TextMeshProUGUI questionText;
@@ -199,11 +200,16 @@ public class QuestionStudent : MonoBehaviour
     {
         if (CheckAnswer())
         {
+            correctAnswer++;
+
             CalculateScore();
         }
         else
         {
-            popUpReveal.SetText("Kamu Salah\nDASAR BODOH!");
+            wrongAnswer++;
+
+            popUpReveal.SetText("Jawaban Kamu\nSalah");
+
             popUpReveal.ShowPopUp();
 
             if (selectedOptionKey != -1)
@@ -265,5 +271,15 @@ public class QuestionStudent : MonoBehaviour
         //string selectedOption = PlayerPrefs.GetString("SelectedOption");
 
         return selectedOptionKey == answerOptionKey;
+    }
+
+    public int GetCorrectAnswer()
+    {
+        return correctAnswer;
+    }  
+
+    public int GetWrongAnswer()
+    {
+        return wrongAnswer;
     }
 }

@@ -130,4 +130,10 @@ public class IconProfile : MonoBehaviour
 
         iconImage.sprite = iconSprites[index];
     }
+
+    private void OnDestroy()
+    {
+        Profile.Instance.ChangeProfileIcon -= LoadIcon;
+        UserData.Instance.FinishLoading -= LoadProfile;
+    }
 }
