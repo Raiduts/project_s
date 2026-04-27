@@ -44,7 +44,7 @@ public class QueueSequenceGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Perhatikan urutan operasi Queue berikut (Front ke Rear):\n{log}\nBagaimanakah isi Queue terakhir?",
+            questionText = $"Perhatikan urutan operasi Queue berikut (Depan ke Belakang):\n{log}\nBagaimanakah isi Queue terakhir?",
             options = shuffledOps,
             answerKey = correctIdx
         };

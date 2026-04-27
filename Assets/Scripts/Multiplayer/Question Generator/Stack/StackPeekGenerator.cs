@@ -27,7 +27,7 @@ public class StackPeekGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan Stack (Bottom to Top): {initialStr}.\nJika kita memanggil fungsi `Peek()`, nilai apakah yang akan dikembalikan (return) tanpa mengubah isi Stack?",
+            questionText = $"Diberikan Stack (Bawah to Atas): \n{initialStr}.\nJika kita memanggil fungsi `Peek()`, nilai apakah yang akan dikembalikan (return) tanpa mengubah isi Stack?",
             options = shuffledOps,
             answerKey = correctIdx
         };

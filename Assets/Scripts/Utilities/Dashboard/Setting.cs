@@ -50,7 +50,10 @@ public class Setting : MonoBehaviour
 
     public void Logout()
     {
-        AuthManager.Instance.Logout();
-        CloseSetting();
+        WarningPopper.Instance.ShowWarning("Yakin ingin keluar akun?", () =>
+        {
+            AuthManager.Instance.Logout();
+            CloseSetting();
+        });
     }
 }

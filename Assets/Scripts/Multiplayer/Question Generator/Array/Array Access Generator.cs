@@ -17,7 +17,7 @@ public class ArrayAccessGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Berapa nilai index {index} dari {GetContains(array)}?",
+            questionText = $"Berapa nilai indeks {index} dari array berikut?\n\n{GetContains(array)}",
             options = options,
             answerKey = correctIndex
         };

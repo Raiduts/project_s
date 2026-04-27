@@ -25,7 +25,7 @@ public class ArrayIndexLookupGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Pada array {GetContains(array)}, di indeks berapakah nilai {targetValue} berada?",
+            questionText = $"Pada array \n{GetContains(array)}\ndi indeks berapakah nilai {targetValue} berada?",
             options = string.Join(";", ops),
             answerKey = ops.IndexOf(targetIndex.ToString())
         };

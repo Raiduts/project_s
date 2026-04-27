@@ -21,7 +21,7 @@ public class LinkedListTailGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan sebuah Singly Linked List: {linkedListVisual}.\n" +
+            questionText = $"Diberikan sebuah Singly Linked List: \n{linkedListVisual}.\n" +
                            $"Jika kita melakukan traversal dari Head hingga `node.next == NULL`, nilai apakah yang tersimpan di node tersebut?",
             options = options,
             answerKey = correctIndex

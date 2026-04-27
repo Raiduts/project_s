@@ -15,7 +15,7 @@ public class LinkedListRemoveFirstGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan Linked List: {initialList}.\n" +
+            questionText = $"Diberikan Linked List: \n{initialList}.\n" +
                            $"Jika dijalankan fungsi `RemoveFirst()`, bagaimana hasil list akhirnya?",
             options = string.Join(";", ops),
             answerKey = 0

@@ -2126,10 +2126,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 95.45
+  m_fontSize: 72
   m_fontSizeBase: 72
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 48
   m_fontSizeMax: 128
   m_fontStyle: 0
@@ -2767,6 +2767,10 @@ PrefabInstance:
     - target: {fileID: 6827735350395241656, guid: 035ea5d11349c31468c174b01c861ccb, type: 3}
       propertyPath: m_Name
       value: == End Of Quiz ==
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827735350395241656, guid: 035ea5d11349c31468c174b01c861ccb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7467858495791313964, guid: 035ea5d11349c31468c174b01c861ccb, type: 3}
       propertyPath: m_Pivot.x

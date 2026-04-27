@@ -18,7 +18,7 @@ public class LinkedListAddLastGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan Linked List: {initialList}.\n" +
+            questionText = $"Diberikan Linked List: \n{initialList}.\n" +
                            $"Jika dilakukan operasi `AddLast({newValue})`, bagaimana urutan list yang baru?",
             options = string.Join(";", ops),
             answerKey = 0 // Cari index setelah shuffle

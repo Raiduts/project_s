@@ -36,7 +36,7 @@ public class QueueDequeueGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan Queue (Front to Rear): {initialStr}.\nBerapakah nilai yang keluar dan bagaimana sisa Queue jika dilakukan satu kali `Dequeue()`?",
+            questionText = $"Diberikan Queue (Depan ke Belakang): \n{initialStr}.\nBerapakah nilai yang keluar dan bagaimana sisa Queue jika dilakukan satu kali `Dequeue()`?",
             options = shuffledOps,
             answerKey = correctIdx
         };

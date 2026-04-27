@@ -38,7 +38,10 @@ public class Navigate : MonoBehaviour
 
     public void BackHome()
     {
-        MySceneManager.instance.ChangeScene("Dashboard");
+        WarningPopper.Instance.ShowWarning("Yakin ingin kembali?", () => 
+        { 
+            MySceneManager.instance.ChangeScene("Dashboard");
+        });
     }
 
     // Update is called once per frame

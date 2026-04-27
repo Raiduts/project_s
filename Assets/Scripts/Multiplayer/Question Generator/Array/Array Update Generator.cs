@@ -18,7 +18,7 @@ public class ArrayUpdateGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan array {GetContains(array)}.\nJika arr[{index}] = {newValue}, bagaimana hasil akhirnya?",
+            questionText = $"Diberikan array \n{GetContains(array)}\nJika arr[{index}] = {newValue}, bagaimana hasil akhirnya?",
             options = options,
             answerKey = correctIndex
         };

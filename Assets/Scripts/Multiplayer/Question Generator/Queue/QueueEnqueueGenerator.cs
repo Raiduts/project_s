@@ -18,7 +18,7 @@ public class QueueEnqueueGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan Queue (Front ke Rear): {initial}.\n" +
+            questionText = $"Diberikan Queue (Depan ke Belakang): \n{initial}.\n" +
                            $"Jika dilakukan operasi `Enqueue({newValue})`, bagaimana isi Queue sekarang?",
             options = string.Join(";", ops),
             answerKey = 0

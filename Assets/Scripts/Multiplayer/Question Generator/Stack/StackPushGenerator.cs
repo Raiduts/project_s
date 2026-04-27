@@ -40,7 +40,7 @@ public class StackPushGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Sebuah Stack memiliki isi (Bottom to Top): {initialStr}.\nJika dilakukan `Push({newValue})`, bagaimana kondisi Stack sekarang?",
+            questionText = $"Sebuah Stack memiliki isi (Bawah to Atas): \n{initialStr}.\nJika dilakukan `Push({newValue})`, bagaimana kondisi Stack sekarang?",
             options = shuffledOps,
             answerKey = correctIdx
         };

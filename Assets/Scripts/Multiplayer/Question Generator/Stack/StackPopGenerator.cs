@@ -40,7 +40,7 @@ public class StackPopGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan Stack (Bottom to Top): {initialStr}.\nBerapakah nilai yang keluar dan bagaimana sisa Stack jika dilakukan operasi `Pop()`?",
+            questionText = $"Diberikan Stack (Bawan to Atas): \n{initialStr}.\nBerapakah nilai yang keluar dan bagaimana sisa Stack jika dilakukan operasi `Pop()`?",
             options = shuffledOps,
             answerKey = correctIdx
         };

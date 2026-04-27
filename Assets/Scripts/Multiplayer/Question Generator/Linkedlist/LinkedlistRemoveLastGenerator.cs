@@ -15,7 +15,7 @@ public class LinkedListRemoveLastGenerator : QuestionGenerator
 
         return new QuestionData
         {
-            questionText = $"Diberikan Linked List: {initialList}.\n" +
+            questionText = $"Diberikan Linked List: \n{initialList}.\n" +
                            $"Jika dijalankan fungsi `RemoveLast()`, manakah representasi list yang benar?",
             options = string.Join(";", ops),
             answerKey = 0
