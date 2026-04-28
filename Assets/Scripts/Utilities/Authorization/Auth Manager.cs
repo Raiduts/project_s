@@ -5,6 +5,8 @@ using Firebase;
 using Firebase.Auth;
 using Firebase.Firestore;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEditor.SearchService;
 
 public class AuthManager : MonoBehaviour
 {
@@ -31,6 +33,8 @@ public class AuthManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        ResetPrefs();
     }
 
     void Start()
@@ -39,6 +43,14 @@ public class AuthManager : MonoBehaviour
         {
             InitFirebase();
         }
+    }
+
+    private void ResetPrefs()
+    {
+        PlayerPrefs.SetInt("Dashboard Page", 1);
+        PlayerPrefs.SetInt("Training Tab", 0);
+        PlayerPrefs.SetInt("Campaign Tab", 0);
+        PlayerPrefs.SetInt("Quiz Tab", 0);
     }
 
     public FirebaseUser User()
@@ -109,6 +121,7 @@ public class AuthManager : MonoBehaviour
         }
         else
         {
+            //MySceneManager.instance.ChangeScene("Dashboard");
             ui.OpenAuth();
         }
     }
@@ -173,7 +186,9 @@ public class AuthManager : MonoBehaviour
         {
             Debug.Log($"Register Success: {name}");
 
-            UserData.Instance.LoadProgress();
+            //SceneManager.LoadScene("Dashboard");
+
+            //UserData.Instance.LoadProgress();
             //MySceneManager.instance.ChangeScene("Dashboard");
             //Login(email, password);
         }
@@ -200,6 +215,8 @@ public class AuthManager : MonoBehaviour
         TryLogOut?.Invoke();
 
         Debug.Log("Logout Success");
+
+        //MySceneManager.instance.ChangeScene("Dashboard");
     }
 
     #endregion

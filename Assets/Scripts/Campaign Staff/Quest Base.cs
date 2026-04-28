@@ -90,14 +90,20 @@ public abstract class QuestBase : MonoBehaviour
 
         if (duduComment != "")
         {
-            Dudu.Instance.ShowDudu(duduComment);        
+            Dudu.Instance.ShowDudu(duduComment, () =>
+            {
+                QuestEvent.CompletedQuest?.Invoke();
+            });
         }
         else
         {
-            Dudu.Instance.ShowDudu("Kerja Bagus!");
+            Dudu.Instance.ShowDudu("Kerja Bagus!", () =>
+            {
+                QuestEvent.CompletedQuest?.Invoke();
+            });
         }
 
-        QuestEvent.CompletedQuest?.Invoke();
+        //QuestEvent.CompletedQuest?.Invoke();
     }
 }
 

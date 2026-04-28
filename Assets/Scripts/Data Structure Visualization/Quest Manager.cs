@@ -43,10 +43,21 @@ public class QuestManager : MonoBehaviour
         }
 
         if (AuthManager.Instance && AuthManager.Instance.User() != null)
-            Dudu.Instance.ShowDudu($"Haloo {AuthManager.Instance.User().DisplayName}, {questLevel.duduText}. Les's Go!!");
-        else Dudu.Instance.ShowDudu("Haloo user!");
+            Dudu.Instance.ShowDudu($"Haloo {AuthManager.Instance.User().DisplayName}, {questLevel.duduText}. Les's Go!!", () =>
+            {
+                print("Ceking");
+                CheckForQuest();
+            });
+        else 
+            Dudu.Instance.ShowDudu("Haloo user!", () =>
+            {
+                print("Ceking");
+                CheckForQuest();
+            });
 
-        Invoke(nameof(CheckForQuest), 5f);
+        //Dudu.Instance.OnHidingEvent += OnCompleteQuest;
+
+        //Invoke(nameof(CheckForQuest), 5f);
 
         QuestEvent.CompletedQuest += OnCompleteQuest;
     }
@@ -71,18 +82,21 @@ public class QuestManager : MonoBehaviour
 
     public void OnCompleteQuest()
     {
-        questInfo.HideQuestInfo();
-
-        print(quests.Count);
-
-        if (quests.Count > 0)
+        questInfo.HideQuestInfo(() =>
         {
-            Invoke(nameof(StartNewQuest), 5f);
-        }
-        else
-        {
-            Invoke(nameof(EndQuest), 5f);
-        }
+            print(quests.Count);
+
+            if (quests.Count > 0)
+            {
+                Invoke(nameof(StartNewQuest), 1.5f);
+                //StartNewQuest();
+            }
+            else
+            {
+                Invoke(nameof(EndQuest), 1.5f);
+            }
+        });
+
     }
 
     private void EndQuest()

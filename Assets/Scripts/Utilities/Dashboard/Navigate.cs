@@ -36,11 +36,13 @@ public class Navigate : MonoBehaviour
         HideNav();
     }
 
-    public void BackHome()
+    public void Back()
     {
+        string prevScene = PlayerPrefs.GetString("Prev Scene", "Dashboard");
+
         WarningPopper.Instance.ShowWarning("Yakin ingin kembali?", () =>
         {
-            MySceneManager.instance.ChangeScene("Dashboard");
+            MySceneManager.instance.ChangeScene(prevScene);
         });
     }
 

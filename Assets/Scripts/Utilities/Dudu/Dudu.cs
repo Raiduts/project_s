@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -9,11 +10,14 @@ public class Dudu : MonoBehaviour
 {
     public static Dudu Instance;
 
-    [SerializeField]
-    private TextMeshProUGUI duduText, taskTitleText, taskProgressText;
+    [SerializeField] private TextMeshProUGUI duduText;
+    [SerializeField] private Image duduImage, duduTextPanel, background;
+    [SerializeField] private Button skipButton;
 
-    [SerializeField]
-    private Image duduImage, duduTextPanel, background;
+    private Sequence duduSequence;
+    private bool isShowing;
+
+    public Action OnHidingEvent;
 
     private void Awake()
     {
@@ -23,20 +27,38 @@ public class Dudu : MonoBehaviour
         }
     }
 
-    public void ShowDudu(string duduSpeech)
+    private void Start()
     {
+        skipButton.onClick.AddListener(HideDudu);
+    }
+
+    public void ShowDudu(string duduSpeech, Action actionDudu)
+    {
+        if (isShowing) return;
+
+        isShowing = true;
+
+        skipButton.gameObject.SetActive(isShowing);
+        
         print("Showing dudu");
 
         duduImage.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
 
-        background.DOFade(0.9f, 0.5f);
-        duduImage.transform.DOMoveY(-1000, 0.5f).From();
-        duduImage.DOFade(1, 0.5f).From(0); 
-        duduTextPanel.DOFade(1, 0.5f).From(0).SetDelay(0.5f).OnComplete(() => 
-        { 
-            TextAnimation(duduSpeech);
-        });
+        OnHidingEvent = actionDudu;
+        
+        duduSequence?.Kill();
+
+        duduSequence = DOTween.Sequence();
+
+        duduSequence.Join(background.DOFade(0.9f, 0.25f));
+        duduSequence.Join(duduImage.transform.DOMoveY(-1000, 0.25f).From());
+        duduSequence.Join(duduImage.DOFade(1, 0.25f).From(0)); 
+        duduSequence.Append(duduTextPanel.DOFade(1, 0.25f).From(0).OnComplete(() => 
+            { 
+                TextAnimation(duduSpeech);
+            }
+        ));
     }
 
     public void TextAnimation(string text)
@@ -61,18 +83,27 @@ public class Dudu : MonoBehaviour
 
     private void HideDudu()
     {
-        // duduImage.DOFade(0, 0.5f).From(1).SetDelay(0.5f);
-        // duduTextPanel.DOFade(0, 0.5f).From(1);
+        if (!isShowing) return;
 
-        duduImage.transform.DOMoveY(-1000, 0.5f).SetDelay(0.5f).OnComplete(() =>
-        {
-            background.DOFade(0, 0.5f).OnComplete(() =>
-            { 
-                background.gameObject.SetActive(false);
-                duduImage.gameObject.SetActive(false);
-                duduImage.transform.position = new(duduImage.transform.position.x, 232, 0);
-                duduText.text = "";
-            });
-        });
+        isShowing = false;
+
+        skipButton.gameObject.SetActive(isShowing);
+        
+        duduSequence?.Kill();
+
+        duduSequence = DOTween.Sequence();
+
+        duduSequence.Join(duduImage.transform.DOMoveY(-1000, 0.5f).SetDelay(0.5f).OnComplete(() =>
+            {
+                background.DOFade(0, 0.5f).OnComplete(() =>
+                { 
+                    background.gameObject.SetActive(false);
+                    duduImage.gameObject.SetActive(false);
+                    duduImage.transform.position = new(duduImage.transform.position.x, 232, 0);
+                    duduText.text = "";
+                    OnHidingEvent?.Invoke();
+                });
+            }
+        ));
     }
 }

@@ -18,8 +18,23 @@ public class FreemodeSection : MonoBehaviour
     [SerializeField]
     private JoinSessionStudent joinSessionStudentPref;
 
+    [SerializeField] private string tabSaveName;
+
+    private void Start()
+    {
+        bool isOpen = PlayerPrefs.GetInt(tabSaveName) == 1;
+
+        //freemodeCanvas.gameObject.SetActive(isOpen);
+        if (isOpen)
+        {
+            OpenGameSection();
+        }
+    }
+
     public void OpenGameSection()
     {
+        PlayerPrefs.SetInt(tabSaveName, 1);
+
         freemodeCanvas.gameObject.SetActive(true);
 
         Sequence seq = DOTween.Sequence();
@@ -48,6 +63,8 @@ public class FreemodeSection : MonoBehaviour
 
     public void CloseGameSection()
     {
+        PlayerPrefs.SetInt(tabSaveName, 0);
+
         Sequence seq = DOTween.Sequence();
 
         // Background fade out (cepet tapi halus)
@@ -85,13 +102,15 @@ public class FreemodeSection : MonoBehaviour
 
     public void EnterFreemode(string sceneName)
     {
-        CloseGameSection();
+
+        //CloseGameSection();
         MySceneManager.instance.ChangeScene(sceneName);
     }
 
     public void EnterCampaign(int campaignType)
     {
-        CloseGameSection();
+
+        //CloseGameSection();
 
         //PlayerPrefs.SetInt("campaignType", campaignType);
 

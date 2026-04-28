@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MySceneManager : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class MySceneManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        PlayerPrefs.SetString("Prev Scene", currentScene);
+
         mLoadingScreen.DoLoadingScreen(sceneName);
     }
 

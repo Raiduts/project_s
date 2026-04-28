@@ -9,7 +9,10 @@ public class QuestChangeDimension : QuestBase
         //ArrayListOperator.instance.SetArrayDimension(true);
         //print("Starting Quest Dimensi");
 
-        Dudu.Instance.ShowDudu("Okay sekarang coba beralih ke mode 2D");
+        Dudu.Instance.ShowDudu("Okay sekarang coba beralih ke mode 2D", () =>
+        {
+            //QuestEvent.CompletedQuest?.Invoke();
+        });
     }
 
     public override void OnChangeDimension(ArrayDimension dimension)
@@ -18,9 +21,9 @@ public class QuestChangeDimension : QuestBase
         
         if (dimension == ArrayDimension.TwoDimension)
         {
-            Dudu.Instance.ShowDudu("Sipp! Sekarang kita sudah beralih ke mode 2D!");
+            Dudu.Instance.ShowDudu("Sipp! Sekarang kita sudah beralih ke mode 2D!", () => { QuestEvent.CompletedQuest?.Invoke(); });
 
-            QuestEvent.CompletedQuest?.Invoke();        
+            //QuestEvent.CompletedQuest?.Invoke();        
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -38,11 +39,12 @@ public class QuestInfo : MonoBehaviour
         rect.DOAnchorPosY(showPosition, 0.5f);
     }
 
-    public void HideQuestInfo()
+    public void HideQuestInfo(Action action)
     {
         //rect.DOAnchorPosX(hidePosition, 0.5f);
         rect.DOAnchorPosY(hidePosition, 0.5f).OnComplete(() =>
         {
+            action?.Invoke();
             questTitle.text = "";
             questObjective.text = "";
         });
