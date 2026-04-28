@@ -43,7 +43,7 @@ public class QuestManager : MonoBehaviour
         }
 
         if (AuthManager.Instance && AuthManager.Instance.User() != null)
-            Dudu.Instance.ShowDudu($"Haloo {AuthManager.Instance.User().DisplayName}, {questLevel.duduText}. Les's Go!!", () =>
+            Dudu.Instance.ShowDudu($"Haloo {AuthManager.Instance.User().DisplayName}, {questLevel.duduText}. Let's Go!!", () =>
             {
                 print("Ceking");
                 CheckForQuest();
