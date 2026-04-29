@@ -38,7 +38,7 @@ public abstract class QuestBase : MonoBehaviour
 
     public virtual void OnStartQuest()
     {
-        //TryShowTips();
+        TryShowTips();
      
         I_OnStartQuest onStartScript = GetComponent<I_OnStartQuest>();
 

@@ -231,10 +231,10 @@ TextureImporter:
       name: UI_GAMEPLAY_5
       rect:
         serializedVersion: 2
-        x: 1327
-        y: 553
-        width: 116
-        height: 62
+        x: 1384
+        y: 558
+        width: 155
+        height: 81
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,10 +273,10 @@ TextureImporter:
       name: UI_GAMEPLAY_7
       rect:
         serializedVersion: 2
-        x: 1327
-        y: 484
-        width: 116
-        height: 61
+        x: 1385
+        y: 463
+        width: 154
+        height: 81
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,7 +341,7 @@ TextureImporter:
         width: 518
         height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 32, y: 32, z: 32, w: 32}
       outline: []
       physicsShape: []
