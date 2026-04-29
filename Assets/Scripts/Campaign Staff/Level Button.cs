@@ -14,12 +14,13 @@ public class LevelButton : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textNumber;
     [SerializeField]
-    private Image Locked;
+    private Image Locked, Ring;
 
     public Action<int> OnSelectLevel;
 
     private void Start()
     {
+        Ring.gameObject.SetActive(false);
         button.onClick.AddListener(OnClickButton);
     }
 
@@ -33,7 +34,6 @@ public class LevelButton : MonoBehaviour
     {
         button.interactable = isInteractable;
         Locked.gameObject.SetActive(!isInteractable);
-
     }
 
     public int GetLevel() 
@@ -51,15 +51,20 @@ public class LevelButton : MonoBehaviour
     public void Reposition(int pos)
     {
         button.transform.localPosition = new(0, pos, 0);
+        Ring.transform.localPosition = new(0, pos, 0);
     }
 
     public void Select()
     {
+        Ring.gameObject.SetActive(true);
+        Ring.DOFade(1, 0.25f);
         button.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack);
     }
 
     public void Deselect()
     {
+        Ring.DOFade(0, 0.25f);
+        Ring.gameObject.SetActive(false);
         button.transform.DOScale(1, 0.25f).SetEase(Ease.InBack);
     }
 }

@@ -46,7 +46,6 @@ public class CampaignLevelManager : MonoBehaviour
             return;
         }
 
-
         levelButtons = new List<LevelButton>();
 
         selectLevelButton.OnStartLevel += StartLevel;
@@ -108,6 +107,8 @@ public class CampaignLevelManager : MonoBehaviour
 
     public void SelectLevel(int x) 
     { 
+        selectLevelButton.button.interactable = true;
+
         selectedLevelInt = x;
         DeselectPrev(selectedLevelInt);
     }

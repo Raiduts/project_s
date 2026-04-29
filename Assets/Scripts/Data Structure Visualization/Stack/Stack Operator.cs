@@ -48,9 +48,14 @@ public class StackOperator : MonoBehaviour
 
     public void PushByType()
     {
-        if (isOperating || !selectedPartPref)
+        if (isOperating)
         {
-            WarningPopper.Instance.SendMessage("Tidak dapat melakukan Push, pilih box terlebih dahulu!");
+            return;
+        }
+
+        if (!selectedPartPref)
+        {
+            ErrorPopper.Instance.ShowError("Tidak dapat melakukan Push, pilih box terlebih dahulu!");
             return;
         }
 
@@ -61,7 +66,12 @@ public class StackOperator : MonoBehaviour
 
     public void PopBurger()
     {
-        if (isOperating || burgerStack.IsEmpty())
+        if (isOperating)
+        {
+            return;
+        }
+
+        if (burgerStack.IsEmpty())
         {
             ErrorPopper.Instance.ShowError("Stack kosong, tidak dapat melakukan Pop!");
             return;
@@ -87,7 +97,11 @@ public class StackOperator : MonoBehaviour
 
     public void PeekBurger()
     {
-        if (burgerStack.IsEmpty()) return;
+        if (burgerStack.IsEmpty())
+        {
+            ErrorPopper.Instance.ShowError("Stack kosong, tidak dapat melakukan Peek!");
+            return;
+        }
 
         EventListener.AccessData?.Invoke();
 

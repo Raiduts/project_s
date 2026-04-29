@@ -46,7 +46,16 @@ public class QueueOperator : MonoBehaviour
 
     public void Enqueue()
     {
-        if (isOperating || selectedIndex == -1) return;
+        if (isOperating)
+        {
+            return;
+        }
+
+        if (selectedIndex == -1)
+        {
+            ErrorPopper.Instance.ShowError("Tidak dapat melakukan Enqueue, pilih ikan terlebih dahulu!");
+            return;
+        }
 
         FishQueue temp = Instantiate(cards[selectedIndex]);
 
@@ -57,7 +66,17 @@ public class QueueOperator : MonoBehaviour
     {
         if (isOperating) return;
 
-        FishQueue temp = queueManager.TakeCard();
+        FishQueue temp;
+        
+        try
+        {
+            temp = queueManager.TakeCard();
+        }
+        catch
+        {
+            ErrorPopper.Instance.ShowError("Queue Kosong, tidak dapat melakukan Dequeue!");
+            return;
+        }
 
         EventListener.RemoveFirst?.Invoke();
 
@@ -70,7 +89,17 @@ public class QueueOperator : MonoBehaviour
     {
         if (isOperating) return;
 
-        FishQueue temp = queueManager.GetFirstFish();
+        FishQueue temp;
+
+        try
+        {
+            temp = queueManager.GetFirstFish();
+        }
+        catch
+        {
+            ErrorPopper.Instance.ShowError("Queue kosong, tidak dapat melakukan Peek!");
+            return;
+        }
 
         EventListener.AccessData?.Invoke();
 

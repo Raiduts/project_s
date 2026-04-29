@@ -16,7 +16,7 @@ public class QueueManager : MonoBehaviour
     {
         if (cards.Count >= 5)
         {
-            CodePrinter.Instance.AddTextCode("Can't add more item (max 5)");
+            ErrorPopper.Instance.ShowError("Tidak bisa menabmah ikan lagi, peraturan Developer! (max 5)");
             Destroy(newCard.gameObject);
             return;
         }
