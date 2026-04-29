@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,11 @@ public class ArrayListOperator : MonoBehaviour
     [SerializeField] private TMP_InputField valueInput;
     [SerializeField] Button setValueButton;
 
+    [SerializeField] private Image[] dimensionButtons;
+    [SerializeField] private Sprite toggle1D,toggle2D;
+
+    [SerializeField] private Image buatButton, editButton;
+
     private bool is2D = true, isOpen = true, isOnAction, isCreating = true;
 
     public Locomotive GetLocomotive()
@@ -33,6 +39,12 @@ public class ArrayListOperator : MonoBehaviour
     public void SetArrayDimension(bool is2DNow)
     {
         is2D = is2DNow;
+
+        for (int i = 0; i < dimensionButtons.Length; i++)
+        {
+            dimensionButtons[i].sprite = is2D ? toggle2D : toggle1D;
+        }
+
         yLength.gameObject.SetActive(is2DNow);
         yIndex.gameObject.SetActive(is2DNow);
     }
@@ -270,6 +282,7 @@ public class ArrayListOperator : MonoBehaviour
     {
         if (GetLocomotive() == null || GetLocomotive().array.Length >= 5)
         {
+            ErrorPopper.Instance.ShowError("Kereta belum dibuat!");
             return;
         }
 
@@ -286,6 +299,7 @@ public class ArrayListOperator : MonoBehaviour
     {
         if (GetLocomotive() == null || GetLocomotive().array.Length >= 5)
         {
+            ErrorPopper.Instance.ShowError("Kereta belum dibuat!");
             return;
         }
 
@@ -302,6 +316,7 @@ public class ArrayListOperator : MonoBehaviour
     {
         if (GetLocomotive() == null || GetLocomotive().array.Length <= 0)
         {
+            ErrorPopper.Instance.ShowError("Kereta belum dibuat!");
             return;
         }
 
@@ -316,6 +331,7 @@ public class ArrayListOperator : MonoBehaviour
     {
         if (GetLocomotive() == null || GetLocomotive().array.Length <= 0)
         {
+            ErrorPopper.Instance.ShowError("Kereta belum dibuat!");
             return;
         }
 
@@ -328,6 +344,9 @@ public class ArrayListOperator : MonoBehaviour
 
     private IEnumerator ChangeModeWhileOpen()
     {
+        buatButton.color = isCreating ? Color.white : Color.gray;
+        editButton.color = !isCreating ? Color.white : Color.gray;
+
         OpenCloseTablet();
 
         yield return new WaitForSeconds(0.5f);
@@ -338,14 +357,14 @@ public class ArrayListOperator : MonoBehaviour
         OpenCloseTablet();
     }
 
-    public void ChangeMode()
+    public void ChangeMode(bool isCreate)
     {
-        if (isOnAction)
+        if (isOnAction || isCreating == isCreate)
         {
             return;
         }
 
-        isCreating = !isCreating;
+        isCreating = isCreate;
 
         if (isOpen)
         {

@@ -24,7 +24,7 @@ public class BurgerStack : MonoBehaviour
     {
         if (burgerStack.Count >= 9)
         {
-            CodePrinter.Instance.AddTextCode($"Can't add more item (max 9)");
+            ErrorPopper.Instance.ShowError($"Can't add more item (max 9)");
             Destroy(part.gameObject);
             return;
         }

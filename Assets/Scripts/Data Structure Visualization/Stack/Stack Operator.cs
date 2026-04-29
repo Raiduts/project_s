@@ -48,7 +48,11 @@ public class StackOperator : MonoBehaviour
 
     public void PushByType()
     {
-        if (isOperating || !selectedPartPref) return;
+        if (isOperating || !selectedPartPref)
+        {
+            WarningPopper.Instance.SendMessage("Tidak dapat melakukan Push, pilih box terlebih dahulu!");
+            return;
+        }
 
         BurgerPart tempPart = Instantiate(selectedPartPref, transform);
 
@@ -57,7 +61,11 @@ public class StackOperator : MonoBehaviour
 
     public void PopBurger()
     {
-        if (isOperating || burgerStack.IsEmpty()) return;
+        if (isOperating || burgerStack.IsEmpty())
+        {
+            ErrorPopper.Instance.ShowError("Stack kosong, tidak dapat melakukan Pop!");
+            return;
+        }
 
         BurgerPart temp = burgerStack.PopBurger();
 
