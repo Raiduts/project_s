@@ -95,10 +95,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1141859117037475282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 128}
-  m_SizeDelta: {x: 0, y: 128}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -359.06775, y: -354.86444}
+  m_SizeDelta: {x: 486.6006, y: 45.4171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &878572950066867074
 CanvasRenderer:
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Tekan dimana saja untuk melewati -'
+  m_text: Klik untuk melaksanakan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5f7f3a875f805448b389105bb293201, type: 2}
   m_sharedMaterial: {fileID: -3770304292833715186, guid: b5f7f3a875f805448b389105bb293201, type: 2}
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284547071
-  m_fontColor: {r: 1, g: 1, b: 0.37647063, a: 1}
+    rgba: 2989108270
+  m_fontColor: {r: 0.18039216, g: 0.17254902, b: 0.16470589, a: 0.69803923}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -155,13 +155,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8352941}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
