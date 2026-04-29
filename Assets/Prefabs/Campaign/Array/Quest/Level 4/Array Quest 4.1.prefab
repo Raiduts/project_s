@@ -97,5 +97,5 @@ MonoBehaviour:
   questTitle: Membuat Array Kereta 2D
   questObjective: Buatlah array kereta 2D dengan panjang 4 tinggi 2
   duduComment: Oke sipp, kamu berhasil membuat array dengan panjang x 4 dan y 2
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 714cacdeaee906248938adb54a786fd4, type: 3}
   requiredSize: {x: 4, y: 2}

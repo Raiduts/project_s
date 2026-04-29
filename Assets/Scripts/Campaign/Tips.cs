@@ -33,6 +33,8 @@ public class Tips : MonoBehaviour
         nextButton.transform.localScale = Vector3.zero;
         prevButton.transform.localScale = Vector3.zero;
 
+        tipsImage.sprite = tipsSprites[0];
+
         // ANIMATION
         Sequence seq = DOTween.Sequence();
 

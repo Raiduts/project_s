@@ -100,7 +100,7 @@ MonoBehaviour:
   questTitle: Mengisi indeks pada Array Kereta 1D
   questObjective: Isilah indeks [3] dengan nilai 20
   duduComment: Hebat! kamu berhasil mengisi indeks [3] dengan nilai 20
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: b95cfeb41f345a646a72ac562628afd3, type: 3}
   reqVector: {x: 3, y: 0}
   requiredNumber: 20
 --- !u!114 &1025308073166471450
