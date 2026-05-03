@@ -3,10 +3,6 @@ using System.Collections;
 using UnityEngine;
 using Firebase;
 using Firebase.Auth;
-using Firebase.Firestore;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEditor.SearchService;
 
 public class AuthManager : MonoBehaviour
 {

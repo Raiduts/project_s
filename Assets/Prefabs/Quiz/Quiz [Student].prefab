@@ -371,8 +371,8 @@ MonoBehaviour:
   isActive: 1
   isValid: 1
   target: {fileID: 5856692723091536186}
-  animationType: 1
-  targetType: 5
+  animationType: 4
+  targetType: 11
   forcedTargetType: 0
   autoPlay: 1
   useTargetAsV3: 0

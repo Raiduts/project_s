@@ -60,7 +60,7 @@ public class QuestionStudent : MonoBehaviour
     {
         quizObject.SetActive(true);
 
-        timerValue = 15;
+        timerValue = 30;
 
         isTicking = true;
 
@@ -84,7 +84,7 @@ public class QuestionStudent : MonoBehaviour
         {
             timerValue -= Time.deltaTime;
 
-            timerSlider.value = timerValue / 15;
+            timerSlider.value = timerValue / 30;
 
             timerText.text = $"{(int) timerValue} detik";
         }
@@ -122,7 +122,7 @@ public class QuestionStudent : MonoBehaviour
         isChanging = false;
 
         // Reset Timer
-        timerValue = 15;
+        timerValue = 30;
 
         // Set Question
         questionText.text = questionData.questionText;
@@ -254,7 +254,7 @@ public class QuestionStudent : MonoBehaviour
 
     private void CalculateScore()
     {
-        int tempScore = (int) (timerValue * 100);
+        int tempScore = (int) (timerValue * 33);
 
         QuizScoringStudent.Instance.AddScore(tempScore);
 
