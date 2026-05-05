@@ -102,6 +102,11 @@ public class CampaignLevelManager : MonoBehaviour
 
             // Set Level Data
             currentLevelData[i].level = i;
+
+            if (i == currentUnlockedLevel)
+            {
+                tempButton.OnClickButton();
+            }
         }
     }
 

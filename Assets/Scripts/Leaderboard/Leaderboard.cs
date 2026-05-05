@@ -28,7 +28,6 @@ public class Leaderboard : MonoBehaviour
 
         db.Collection("Leaderboard")
         .OrderByDescending("score")
-        .Limit(10)
         .GetSnapshotAsync()
         .ContinueWithOnMainThread(task =>
         {
@@ -38,13 +37,17 @@ public class Leaderboard : MonoBehaviour
 
                 foreach (var doc in task.Result.Documents)
                 {
+                    //doc.Reference.UpdateAsync("iconIndex", Random.Range(0,3));
+
                     string name = doc.GetValue<string>("name");
 
                     int score = doc.GetValue<int>("score");
 
+                    int icon = doc.GetValue<int>("iconIndex");
+
                     UserScore tempUserScore = Instantiate(userScorePref);
 
-                    tempUserScore.SetUserScore(rank, name, score);
+                    tempUserScore.SetUserScore(rank, name, score, icon);
 
                     tempUserScore.transform.SetParent(container);
 
@@ -54,6 +57,8 @@ public class Leaderboard : MonoBehaviour
                 }
             }
         });
+
+
     }
 
     private void OnDestroy()

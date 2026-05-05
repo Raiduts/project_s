@@ -41,7 +41,7 @@ public class AuthUIBinder : MonoBehaviour
     {
         if (newPasswordTextField.text != confirmPasswordTextField.text)
         {
-            Debug.LogError("Password not match");
+            ErrorPopper.Instance.ShowError("Kata sandi harus sama!");
             return;
         }
 

@@ -6,16 +6,19 @@ using UnityEngine.UI;
 
 public class UserScore : MonoBehaviour
 {
-    public Image backgroundImage;
+    public Image backgroundImage, iconProfileImage;
     public TextMeshProUGUI numberText, nameText, scoreText;
+
+    [SerializeField] private Sprite[] iconSprites;
 
     public Color[] colors;
 
-    public void SetUserScore(int number, string name, int score)
+    public void SetUserScore(int number, string name, int score, int iconNumber)
     {
         numberText.text = number.ToString();
         nameText.text = name;
         scoreText.text = score.ToString();
+        iconProfileImage.sprite = iconSprites[iconNumber];
 
         SetColor(number);
     }

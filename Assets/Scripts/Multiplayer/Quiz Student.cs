@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class QuizStudent : MonoBehaviour
 {
-    FirebaseFirestore db;
-    FirebaseAuth auth;
-    [SerializeField]
-    List<QuestionData> localQuestions = new List<QuestionData>();
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
+    [SerializeField] private List<QuestionData> generatedQuestions = new List<QuestionData>();
 
     private string code;
 
@@ -37,15 +36,12 @@ public class QuizStudent : MonoBehaviour
 
         foreach (DocumentSnapshot doc in snapshot.Documents)
         {
-            localQuestions.Add(doc.ConvertTo<QuestionData>());
+            generatedQuestions.Add(doc.ConvertTo<QuestionData>());
         }
 
-        ShuffleQuestions(localQuestions);
+        ShuffleQuestions(generatedQuestions);
 
-        Debug.Log($"Berhasil ambil {localQuestions.Count} soal.");
-
-        // Start Quiz
-        QuestionStudent.Instance.localQuestions = localQuestions;
+        QuestionStudent.Instance.localQuestions = generatedQuestions;
 
         QuizCountdown.Instance.StartCountdown();
     }
@@ -59,11 +55,6 @@ public class QuizStudent : MonoBehaviour
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
         }
-
-        //foreach (QuestionData item in list)
-        //{
-        //    print(item.questionText);
-        //}
     }
 
     public void UploadScoreToLeaderboard(int score)
@@ -71,7 +62,6 @@ public class QuizStudent : MonoBehaviour
         SubmitAnswer(code, score);
     }
 
-    // 2. Update skor ke leaderboard (Gunakan Email sebagai ID Dokumen)
     public void SubmitAnswer(string quizCode, int currentScore)
     {
         string userEmail = auth.CurrentUser.Email;
@@ -91,10 +81,8 @@ public class QuizStudent : MonoBehaviour
             { "name", userName },
             { "score", currentScore },
             { "iconIndex", iconIndex }
-            //{ "lastUpdated", FieldValue.ServerTimestamp }
         };
 
-        // SetAsync dengan Merge agar tidak menimpa data lain jika ada
         scoreRef.SetAsync(data, SetOptions.MergeAll);
     }
 }

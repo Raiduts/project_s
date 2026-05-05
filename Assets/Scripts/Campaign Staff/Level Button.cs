@@ -18,9 +18,13 @@ public class LevelButton : MonoBehaviour
 
     public Action<int> OnSelectLevel;
 
-    private void Start()
+    private void Awake()
     {
         Ring.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
         button.onClick.AddListener(OnClickButton);
     }
 
@@ -41,10 +45,10 @@ public class LevelButton : MonoBehaviour
         return level; 
     }
 
-    private void OnClickButton()
+    public void OnClickButton()
     {
         Select();
-        print("Selected Level: " + level);
+        //print("Selected Level: " + level);
         OnSelectLevel?.Invoke(level);
     }
 
@@ -58,7 +62,10 @@ public class LevelButton : MonoBehaviour
     {
         Ring.gameObject.SetActive(true);
         Ring.DOFade(1, 0.25f);
-        button.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack);
+        button.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            DashboardMarker.Instance.MoveToTarget(button.GetComponent<RectTransform>());
+        });
     }
 
     public void Deselect()

@@ -240,7 +240,8 @@ public class UserData : MonoBehaviour
                     docRef.SetAsync(new Dictionary<string, object>()
                     {
                         { "name", playerName },
-                        { "score", score }
+                        { "score", score },
+                        { "iconIndex", UserData.Instance.iconIndex }
                     });
                 }
             }
@@ -249,7 +250,8 @@ public class UserData : MonoBehaviour
                 docRef.SetAsync(new Dictionary<string, object>()
                 {
                     { "name", playerName },
-                    { "score", score }
+                    { "score", score },
+                    { "iconIndex", UserData.Instance.iconIndex }
                 });
             }
         });

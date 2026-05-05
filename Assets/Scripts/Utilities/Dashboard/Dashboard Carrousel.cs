@@ -45,4 +45,9 @@ public class DashboardCarrousel : MonoBehaviour
 
         transform.DOLocalMoveX(targetX, skip ? 0 : 0.5f).SetEase(Ease.OutBack);
     }
+
+    public void CallMarker(RectTransform rectTransform)
+    {
+        DashboardMarker.Instance.MoveToTarget(rectTransform);
+    }
 }

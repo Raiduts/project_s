@@ -52,10 +52,13 @@ public class QuizLeaderboard : MonoBehaviour
                 if (doc.Exists && doc.ContainsField("name") && doc.ContainsField("score"))
                 {
                     string name = doc.GetValue<string>("name");
+
                     int score = doc.GetValue<int>("score");
 
+                    int icon = doc.GetValue<int>("iconIndex");
+
                     UserScore tempUserScore = Instantiate(userScorePref, container);
-                    tempUserScore.SetUserScore(rank, name, score);
+                    tempUserScore.SetUserScore(rank, name, score, icon);
                     tempUserScore.transform.localScale = Vector3.one;
 
                     rank++;

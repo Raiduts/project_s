@@ -38,6 +38,7 @@ public class QuizScoringStudent : MonoBehaviour
         playerItem.SetData(AuthManager.Instance.User().DisplayName, UserData.Instance.iconIndex);
 
         correctText.text = QuestionStudent.Instance.GetCorrectAnswer().ToString();
+
         wrongText.text = QuestionStudent.Instance.GetWrongAnswer().ToString();  
     }
 

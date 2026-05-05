@@ -27,6 +27,7 @@ public class Profile : MonoBehaviour
     private void Start()
     {
         backgroundImage.gameObject.SetActive(true);
+        backgroundImage.raycastTarget = false;
 
         // Posisi awal (off screen bawah)
         shownPos = profilePanel.anchoredPosition;
@@ -47,6 +48,7 @@ public class Profile : MonoBehaviour
     public void OpenProfile()
     {
         // Fade background
+        backgroundImage.raycastTarget = true;
         backgroundImage.DOFade(0.5f, 0.3f);
         closeButton.DOAnchorPosY(-128, 0.3f);
 
@@ -64,6 +66,7 @@ public class Profile : MonoBehaviour
         // Turun lagi
         profilePanel.DOAnchorPos(hiddenPos, 0.3f)
             .SetEase(Ease.InBack);
+        backgroundImage.raycastTarget = false;
     }
 
     public void ChangeIconById(int id)
