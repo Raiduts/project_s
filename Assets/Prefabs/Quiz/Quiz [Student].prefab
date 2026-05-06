@@ -363,7 +363,7 @@ MonoBehaviour:
   loopType: 0
   loops: 1
   id: 
-  isRelative: 1
+  isRelative: 0
   isFrom: 1
   isIndependentUpdate: 0
   autoKill: 1
@@ -371,13 +371,13 @@ MonoBehaviour:
   isActive: 1
   isValid: 1
   target: {fileID: 5856692723091536186}
-  animationType: 4
+  animationType: 5
   targetType: 11
   forcedTargetType: 0
   autoPlay: 1
   useTargetAsV3: 0
   endValueFloat: 0
-  endValueV3: {x: 0, y: 100, z: 0}
+  endValueV3: {x: 0, y: 1, z: 1}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
   endValueString: 
@@ -2315,6 +2315,11 @@ MonoBehaviour:
   questionNumberText: {fileID: 98565942381135733}
   optionGrid: {fileID: 692809616277833244}
   quizOptionPref: {fileID: 5860195555775063684, guid: d348342d1b2ae1d45b260fd767f3d5f7, type: 3}
+  optionColors:
+  - {r: 0.75686276, g: 0.3529412, b: 0.17254902, a: 1}
+  - {r: 0.69411767, g: 0.21176471, b: 0.7254902, a: 1}
+  - {r: 0.2, g: 0.28235295, b: 0.7882353, a: 1}
+  - {r: 0.627451, g: 0.67058825, b: 0.14901961, a: 1}
   popUpReveal: {fileID: 7903936687070726169}
 --- !u!1 &8092552458278479263
 GameObject:

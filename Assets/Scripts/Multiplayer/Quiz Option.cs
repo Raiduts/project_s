@@ -17,12 +17,15 @@ public class QuizOption : MonoBehaviour
 
     public Action<int> ChooseOption;
 
-    private void Start()
+    private void Awake()
     {
         optionImage = GetComponent<Image>();
         textColor = optionText.color;
         optionColor = optionImage.color;
+    }
 
+    private void Start()
+    {
         SpawnOption();
     }
 
@@ -49,6 +52,11 @@ public class QuizOption : MonoBehaviour
     public void TurnRed()
     {
         optionImage.DOColor(new Color32(213, 52, 63, 255), 0.1f);
+    }
+
+    public void SetColorImage(Color newColor)
+    {
+        optionImage.color = newColor;
     }
 
     public void HideOption()

@@ -30,6 +30,7 @@ public class QuestionStudent : MonoBehaviour
     [Header("Options")]
     [SerializeField] private Transform optionGrid;
     [SerializeField] private QuizOption quizOptionPref;
+    [SerializeField] private Color[] optionColors;
     private QuizOption[] quizOptions;
     private string[] options;
     private string currentAnswerKey;
@@ -155,6 +156,7 @@ public class QuestionStudent : MonoBehaviour
 
             quizOptionTemp.SetText(optionText);
             quizOptionTemp.SetOptionIndex(index);
+            quizOptionTemp.SetColorImage(optionColors[index]);
 
             // Add To Array
             quizOptions[index] = quizOptionTemp;
