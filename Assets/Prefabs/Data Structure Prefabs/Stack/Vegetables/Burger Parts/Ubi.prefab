@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95948f83b28ba11439f34c7fa38f27eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partName: Ubi
+  partName: Laboo
   id: 2
   transformOffset: -0.1
   spriteRenderer: {fileID: 0}

@@ -47,5 +47,5 @@ MonoBehaviour:
   questTitle: Mengisi Stack
   questObjective: Masukkan </b>Ikan Tunne<b> ke antrian
   duduComment: Kerja Bagus!
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 479dc1ae424537b4e8db27ba0df935e9, type: 3}
   requiredNumber: 2

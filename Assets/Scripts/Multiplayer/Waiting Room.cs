@@ -40,7 +40,6 @@ public class WaitingRoom : MonoBehaviour
         startButton.gameObject.SetActive(false);
         startButton.onClick.AddListener(OnClickStart);
 
-        JoinWaitingRoom();
         CheckRoomOwner();
         ListenPlayers();
     }
@@ -97,6 +96,7 @@ public class WaitingRoom : MonoBehaviour
                     {
                         PlayerPrefs.SetInt("IsTeacher", 0);
                         startButton.gameObject.SetActive(false);
+                        JoinWaitingRoom();
                     }
 
                     quizSceneManager.ListenRoomStatus();

@@ -31,6 +31,7 @@ public class QuizTeacher : MonoBehaviour
         questionManager = GetComponent<QuestionManager>();
 
         questionGenerator = questionManager.GenerateRandomQuestions(questionsQuantity);
+
         CreateQuiz(code);
 
         leaderboard.ListenToQuizLeaderboard(code);

@@ -83,7 +83,7 @@ public class StackOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"stack.Pop()");
 
-        CodePrinter.Instance.AddTextCode($"return : {temp.GetName()}");
+        CodePrinter.Instance.AddTextReturn($"return : {temp.GetName()}");
     }
 
     public void CheckSize()
@@ -92,7 +92,7 @@ public class StackOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"stack.Size()");
 
-        CodePrinter.Instance.AddTextCode($"return : {burgerStack.GetSize()}");
+        CodePrinter.Instance.AddTextReturn($"return : {burgerStack.GetSize()}");
     }
 
     public void PeekBurger()
@@ -107,14 +107,14 @@ public class StackOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"stack.Peek()");
 
-        CodePrinter.Instance.AddTextCode($"return : {burgerStack.GetTopPart().GetName()}");
+        CodePrinter.Instance.AddTextReturn($"return : {burgerStack.GetTopPart().GetName()}");
     }
 
     public void IsEmpty()
     {
         CodePrinter.Instance.AddTextCode($"stack.IsEmpty()");
 
-        CodePrinter.Instance.AddTextCode($"return : {(burgerStack.IsEmpty()? "true" : "false")}");
+        CodePrinter.Instance.AddTextReturn($"return : {(burgerStack.IsEmpty()? "true" : "false")}");
     }
 }
 

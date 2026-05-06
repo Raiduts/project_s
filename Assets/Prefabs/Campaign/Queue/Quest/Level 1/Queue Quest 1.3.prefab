@@ -47,4 +47,4 @@ MonoBehaviour:
   questTitle: Mengambil Queue
   questObjective: Ambil Ikan paling depan
   duduComment: Kerja Bagus!
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: d1e29469dc20c2943a8c663ece927843, type: 3}

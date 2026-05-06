@@ -47,6 +47,6 @@ MonoBehaviour:
   questTitle: Traversal Insert
   questObjective: Isi gerbong 1 dengan nilai 10
   duduComment: Keren mantap
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 6b8b6396c04a38649a1188e244b061de, type: 3}
   reqVector: {x: 1, y: 0}
   requiredNumber: 10

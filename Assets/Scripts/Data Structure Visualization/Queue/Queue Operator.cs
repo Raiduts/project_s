@@ -82,7 +82,7 @@ public class QueueOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"queue.Dequeue()");
 
-        CodePrinter.Instance.AddTextCode($"return : {temp.GetName()}");
+        CodePrinter.Instance.AddTextReturn($"return : {temp.GetName()}");
     }
 
     public void Peek()
@@ -105,7 +105,7 @@ public class QueueOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"queue.Peek()");
 
-        CodePrinter.Instance.AddTextCode($"return : {temp.GetName()}");
+        CodePrinter.Instance.AddTextReturn($"return : {temp.GetName()}");
     }
 
     public void IsEmpty()
@@ -116,7 +116,7 @@ public class QueueOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"queue.IsEmpty()");
 
-        CodePrinter.Instance.AddTextCode($"return : {isEmpty}");
+        CodePrinter.Instance.AddTextReturn($"return : {isEmpty}");
     }
 
     public void Size()
@@ -129,6 +129,6 @@ public class QueueOperator : MonoBehaviour
 
         CodePrinter.Instance.AddTextCode($"queue.GetSize()");
 
-        CodePrinter.Instance.AddTextCode($"return : {size}");
+        CodePrinter.Instance.AddTextReturn($"return : {size}");
     }
 }

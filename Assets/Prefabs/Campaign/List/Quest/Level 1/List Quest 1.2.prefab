@@ -47,5 +47,5 @@ MonoBehaviour:
   questTitle: Add First
   questObjective: Tambahkan 1 gerbong baru dari depan dengan nilai 25
   duduComment: kamu berhasil menambahkan data baru di depan
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 1cae5edbf7c35864eae05dcba543991e, type: 3}
   requiredNumber: 25

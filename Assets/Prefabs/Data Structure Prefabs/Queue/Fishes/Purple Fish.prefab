@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1417312670739203704, guid: d1c07b1fe0ddacc4bab0afba35ad45fe, type: 3}
       propertyPath: fishName
-      value: Salmon
+      value: Bash
       objectReference: {fileID: 0}
     - target: {fileID: 4765926197554317507, guid: d1c07b1fe0ddacc4bab0afba35ad45fe, type: 3}
       propertyPath: m_LocalPosition.x

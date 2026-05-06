@@ -47,5 +47,5 @@ MonoBehaviour:
   questTitle: Linkedlist
   questObjective: Buatlah kereta Linkedlist baru
   duduComment: 
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 460773bae7fe8f3459c626eb5361ac2d, type: 3}
   requiredSize: {x: 0, y: 1}

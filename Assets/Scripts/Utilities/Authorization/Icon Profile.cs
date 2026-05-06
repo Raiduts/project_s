@@ -80,6 +80,7 @@ public class IconProfile : MonoBehaviour
 
     public void LoadName()
     {
+        //print("Load Name");
         nameText.text = auth.CurrentUser.DisplayName;
     }
 

@@ -17,7 +17,7 @@ public class UserData : MonoBehaviour
 
     [Header("Data")]
     // Profile Data
-    public int iconIndex, score, level = 1; 
+    public int iconIndex, score, level = 1;
 
     // Campaign Data
     public int arrayLevel, linkedlistLevel, stackLevel, queueLevel;
@@ -27,7 +27,7 @@ public class UserData : MonoBehaviour
     // Event
     public Action DataUpdated, DataSaved, FinishLoading, LoadingData;
 
-    public bool isNewAccount;
+    public bool isNewAccount, isSaving, isLoading;
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class UserData : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
         db = FirebaseFirestore.DefaultInstance;
 
-        auth.StateChanged += OnStateChanged;   
+        auth.StateChanged += OnStateChanged;
     }
 
     private void OnStateChanged(object sender, EventArgs e)
@@ -64,9 +64,12 @@ public class UserData : MonoBehaviour
     // 🔥 SAVE DATA
     public void SaveProgress()
     {
-        if (auth.CurrentUser == null) return;
+        if (auth.CurrentUser == null || isSaving) return;
+
+        isSaving = true;
 
         string email = auth.CurrentUser.Email;
+
         DocumentReference docRef = db.Collection("Users").Document(email);
 
         Dictionary<string, object> data = new Dictionary<string, object>()
@@ -117,7 +120,9 @@ public class UserData : MonoBehaviour
     // 🔥 LOAD DATA
     public void LoadProgress()
     {
-        if (auth.CurrentUser == null) return;
+        if (auth.CurrentUser == null || isLoading) return;
+
+        isLoading = true;
 
         LoadingData?.Invoke();
 
@@ -173,7 +178,9 @@ public class UserData : MonoBehaviour
                 else
                 {
                     print("Data belum ada, bikin baru");
-                    SaveProgress();
+
+                    //ResetProgress();
+                    //SaveProgress();
 
                     isNewAccount = true;
                 }
@@ -183,7 +190,6 @@ public class UserData : MonoBehaviour
                 print("Gagal load: " + task.Exception);
             }
         });
-
 
         // Load personal score
         DocumentReference leaderboardRef = db.Collection("Leaderboard").Document(email);
@@ -201,8 +207,31 @@ public class UserData : MonoBehaviour
 
                 // Calculate Level
                 CalculateLevel();
+
+                isLoading = true;
             }
         });
+    }
+
+    public void ResetProgress()
+    {
+        iconIndex = 0;
+        score = 0;
+        //level = snapshot.ContainsField("level") ? snapshot.GetValue<int>("level") : 1;
+
+        // Level
+        arrayLevel = 0;
+        linkedlistLevel = 0;
+        stackLevel = 0;
+        queueLevel = 0;
+
+        // Completed
+        completedArray = false;
+        completedLinkedlist = false;
+        completedStack = false;
+        completedQueue = false;
+
+        SaveProgress();
     }
 
     public void AddScore(int score)
@@ -235,14 +264,16 @@ public class UserData : MonoBehaviour
             {
                 int oldScore = task.Result.GetValue<int>("score");
 
-                if (score > oldScore)
+                if (score >= oldScore)
                 {
                     docRef.SetAsync(new Dictionary<string, object>()
                     {
                         { "name", playerName },
                         { "score", score },
-                        { "iconIndex", UserData.Instance.iconIndex }
+                        { "iconIndex", iconIndex }
                     });
+                    AuthManager.Instance.LoggedIn?.Invoke();
+                    isSaving = false;
                 }
             }
             else
@@ -251,8 +282,9 @@ public class UserData : MonoBehaviour
                 {
                     { "name", playerName },
                     { "score", score },
-                    { "iconIndex", UserData.Instance.iconIndex }
+                    { "iconIndex", iconIndex }
                 });
+                isSaving = false;
             }
         });
     }

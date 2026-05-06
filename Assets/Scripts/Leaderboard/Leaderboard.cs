@@ -57,8 +57,6 @@ public class Leaderboard : MonoBehaviour
                 }
             }
         });
-
-
     }
 
     private void OnDestroy()

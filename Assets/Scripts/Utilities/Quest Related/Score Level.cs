@@ -49,6 +49,7 @@ public class ScoreLevel : MonoBehaviour
     public void BackToCampaign()
     {
         MySceneManager.instance.ChangeScene("Campaign");
+        PlayerPrefs.DeleteKey("Prev Scene");
     }
 
     private void OnDestroy()

@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questTitle: Melihat Queue
-  questObjective: Cek antrian paling depan
+  questObjective: Lihat antrian paling depan
   duduComment: Kerja Bagus!
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 9a0a13099cf4ebc498451e91ab4d446b, type: 3}
 --- !u!114 &-7161519664449144764
 MonoBehaviour:
   m_ObjectHideFlags: 0

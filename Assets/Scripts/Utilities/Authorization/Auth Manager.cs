@@ -63,6 +63,7 @@ public class AuthManager : MonoBehaviour
                 InitializeFirebase();
                 isInitialized = true;
                 Debug.Log("Firebase Initialized");
+                //UserData.Instance.LoadProgress();
             }
             else
             {
@@ -182,6 +183,7 @@ public class AuthManager : MonoBehaviour
         {
             Debug.Log($"Register Success: {name}");
 
+            UserData.Instance.ResetProgress();
             //SceneManager.LoadScene("Dashboard");
 
             //UserData.Instance.LoadProgress();
@@ -200,6 +202,12 @@ public class AuthManager : MonoBehaviour
 
         auth.SignOut();
         user = null;
+        
+        //if (restart)
+        //{
+        //    MySceneManager.instance.ChangeScene("Dashboard");
+        //    return;
+        //}
 
         if (ui != null)
         {
@@ -212,7 +220,6 @@ public class AuthManager : MonoBehaviour
 
         Debug.Log("Logout Success");
 
-        //MySceneManager.instance.ChangeScene("Dashboard");
     }
 
     #endregion

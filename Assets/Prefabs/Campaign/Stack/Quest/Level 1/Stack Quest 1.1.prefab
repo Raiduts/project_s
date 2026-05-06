@@ -47,5 +47,5 @@ MonoBehaviour:
   questTitle: Mengisi Stack
   questObjective: Masukkan </b>Box Javu<b> ke tumpukan
   duduComment: 
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 6917e214e529014469e04ef186d3d11d, type: 3}
   requiredNumber: 0

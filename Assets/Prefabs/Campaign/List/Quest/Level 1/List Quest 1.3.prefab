@@ -47,5 +47,5 @@ MonoBehaviour:
   questTitle: Add Last
   questObjective: Tambahkan 1 gerbong baru dari belakang dengan nilai 15
   duduComment: kamu berhasil menambahkan data baru di belakang
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: e68526529ae689441b047e88ebff55c0, type: 3}
   requiredNumber: 15

@@ -47,4 +47,4 @@ MonoBehaviour:
   questTitle: Mengambil Stack
   questObjective: Ambil box paling atas
   duduComment: 
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: daaf1ed843da107458f97223a5cdfb1e, type: 3}

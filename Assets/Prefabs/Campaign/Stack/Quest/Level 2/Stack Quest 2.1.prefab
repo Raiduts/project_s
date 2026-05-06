@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questTitle: Melihat Stack
-  questObjective: Cek box paling atas
+  questObjective: Lihat box paling atas
   duduComment: 
-  tips: {fileID: 0}
+  tips: {fileID: 889500356610441486, guid: 856c7d67a69d81f46bea02dfd29299ae, type: 3}
 --- !u!114 &1895482811892987219
 MonoBehaviour:
   m_ObjectHideFlags: 0
