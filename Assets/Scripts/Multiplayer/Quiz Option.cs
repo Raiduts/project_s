@@ -43,12 +43,12 @@ public class QuizOption : MonoBehaviour
 
     public void TurnGreen()
     {
-        optionImage.DOColor(Color.green, 0.1f);
+        optionImage.DOColor(new Color32(31, 194, 115, 255), 0.1f);
     }
 
     public void TurnRed()
     {
-        optionImage.DOColor(Color.red, 0.1f);
+        optionImage.DOColor(new Color32(213, 52, 63, 255), 0.1f);
     }
 
     public void HideOption()
