@@ -1373,7 +1373,7 @@ PrefabInstance:
     - target: {fileID: 5922042245936087796, guid: 9fe38c7acb8b6aa4498fb10d61e5cc45, type: 3}
       propertyPath: bgm
       value: 
-      objectReference: {fileID: 8300000, guid: 8faab6d91a69b6d43b248c6c8f73e3e4, type: 3}
+      objectReference: {fileID: 8300000, guid: 3688f0127554ef74ab2e98406485d265, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

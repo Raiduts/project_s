@@ -337,7 +337,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1632
-        y: 415
+        y: 414
         width: 518
         height: 113
       alignment: 0
@@ -349,6 +349,27 @@ TextureImporter:
       bones: []
       spriteID: 254999adb6a8692468eede344c198aba
       internalID: -1476579701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_GAMEPLAY_11
+      rect:
+        serializedVersion: 2
+        x: 1632
+        y: 562
+        width: 518
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 32, y: 32, z: 32, w: 32}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff34ef8073405fb479476d1f4c1d1bd5
+      internalID: -887093565
       vertices: []
       indices: 
       edges: []
@@ -367,6 +388,7 @@ TextureImporter:
       UI_GAMEPLAY_0: -523397838
       UI_GAMEPLAY_1: -1417481164
       UI_GAMEPLAY_10: -1476579701
+      UI_GAMEPLAY_11: -887093565
       UI_GAMEPLAY_2: 920494287
       UI_GAMEPLAY_3: 1008391341
       UI_GAMEPLAY_4: -146468525

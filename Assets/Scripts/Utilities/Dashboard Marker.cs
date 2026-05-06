@@ -35,9 +35,9 @@ public class DashboardMarker : MonoBehaviour
 
         markerSeq = DOTween.Sequence();
 
-        markerSeq.Join(markerTransform.DOAnchorPos(new Vector3(0, 48, 0), 0.25f).SetEase(Ease.OutBack));
+        markerSeq.Join(markerTransform.DOAnchorPos(new Vector3(0, 64, 0), 0.25f).SetEase(Ease.OutBack));
 
-        markerSeq.Append(markerTransform.DOAnchorPosY(64, 1).SetLoops(int.MaxValue, LoopType.Yoyo));
+        markerSeq.Append(markerTransform.DOAnchorPosY(80, 1).SetLoops(int.MaxValue, LoopType.Yoyo));
     }
 
     private void OnDestroy()

@@ -272,8 +272,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4292144361
+  m_fontColor: {r: 0.91372555, g: 0.92549026, b: 0.8313726, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -969,8 +969,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Buat Kelas
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b5f7f3a875f805448b389105bb293201, type: 2}
-  m_sharedMaterial: {fileID: -3770304292833715186, guid: b5f7f3a875f805448b389105bb293201, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 00fc3513afb4f2448b7dab968e92444e, type: 2}
+  m_sharedMaterial: {fileID: -4224221768836448349, guid: 00fc3513afb4f2448b7dab968e92444e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: -5
+  m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1103,8 +1103,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 491957781, guid: 921e9f52aafeee04d8808c8a9272c074, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -887093565, guid: 921e9f52aafeee04d8808c8a9272c074, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
