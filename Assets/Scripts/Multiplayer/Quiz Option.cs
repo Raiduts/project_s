@@ -43,10 +43,10 @@ public class QuizOption : MonoBehaviour
     {
         optionIndex = index;
     }
-
+        
     public void TurnGreen()
     {
-        optionImage.DOColor(new Color32(31, 194, 115, 255), 0.1f);
+        optionImage.DOColor(new Color32(31, 194, 115, 255), 0.1f);  
     }
 
     public void TurnRed()

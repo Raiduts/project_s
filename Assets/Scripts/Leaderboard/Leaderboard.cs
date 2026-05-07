@@ -19,6 +19,8 @@ public class Leaderboard : MonoBehaviour
 
     public void GetTop10()
     {
+        print("Loading Leaderboard");
+
         foreach (Transform item in container)
         {
             Destroy(item.gameObject);

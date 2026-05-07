@@ -355,6 +355,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 10f0ad36ac2c7ec4c8abe1b31eaa391f, type: 3}
   - {fileID: 21300000, guid: 3c3226a33765dbc4cb3ac24df914948c, type: 3}
   - {fileID: 21300000, guid: 0faf5122974207843a9b52bafca0d39c, type: 3}
+  - {fileID: 21300000, guid: b98a8912dc5d46e40829bd1f9fa99d2b, type: 3}
+  - {fileID: 21300000, guid: bffad70d8855b9945843a8ec6919951d, type: 3}
+  - {fileID: 21300000, guid: c6b261225e55fcc428c479aeaf0a72fa, type: 3}
   colors:
   - {r: 0.89411765, g: 0.8666667, b: 0.41568628, a: 1}
   - {r: 0.7294118, g: 0.7882353, b: 0.80784315, a: 1}
